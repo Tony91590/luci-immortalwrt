@@ -233,6 +233,8 @@ start(){
 	uci set firewall.@defaults[0].fullcone="${fullcone_nat}"
 	uci commit firewall
 
+	/etc/init.d/turboacc_fss start
+
 	[ "${sw_flow}" -ne "1" ] && {
 		[ "${sfe_flow}" -eq "1" ] && {
 			[ "$(have_ecm_init)" = "0" ] && {
