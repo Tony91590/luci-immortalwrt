@@ -5,8 +5,6 @@
 START=90
 STOP=10
 
-. /usr/share/libubox/jshn.sh
-
 EXTRA_COMMANDS="check_status"
 EXTRA_HELP="	check_status Check running status of utils"
 
@@ -14,13 +12,7 @@ restart_utils="true"
 
 PS="/bin/busybox ps"
 
-get_ifname(){
-	json_load "$(ubus call network.interface.wan status)"
-	json_get_var "ifname" "l3_device"
-}
-
 inital_conf(){
-	get_ifname
 	config_load "turboacc"
 	config_get "sw_flow" "config" "sw_flow" "0"
 	config_get "hw_flow" "config" "hw_flow" "0"
@@ -31,7 +23,7 @@ inital_conf(){
 	config_get "dns_caching_mode" "config" "dns_caching_mode" "0"
 	config_get "dns_caching_dns" "config" "dns_caching_dns"
 
-	[ ! -e "/lib/modules/$(uname -r)/nft_flow_offload.ko" ] && { sw_flow="0"; hw_flow="0"; }
+	[ ! -e "/lib/modules/$(uname -r)/xt_FLOWOFFLOAD.ko" ] && { sw_flow="0"; hw_flow="0"; }
 	[ ! -e "/lib/modules/$(uname -r)/shortcut-fe-cm.ko" ] && sfe_flow="0"
 	[ ! -e "/lib/modules/$(uname -r)/tcp_bbr.ko" ] && bbr_cca="0"
 	[ ! -e "/lib/modules/$(uname -r)/xt_FULLCONENAT.ko" ] && fullcone_nat="0"
@@ -233,27 +225,15 @@ revert_dns() {
 	uci commit dhcp
 }
 
-revert_fullcone() {
-	local count="$(iptables -t nat -L PREROUTING | grep 'FULLCONENAT' -c)"
-	for i in "${count}"
-	do
-		iptables -t nat -D PREROUTING -i "${ifname}" -j FULLCONENAT
-		iptables -t nat -D POSTROUTING -o "${ifname}" -j FULLCONENAT
-	done
-}
-
 start(){
 	inital_conf
 
 	uci set firewall.@defaults[0].flow_offloading="${sw_flow}"
-	uci set firewall.@defaults[0].flow_offloading_hw="${hw_flow}
+	uci set firewall.@defaults[0].flow_offloading_hw="${hw_flow}"
+	uci set firewall.@defaults[0].fullcone="${fullcone_nat}"
 	uci commit firewall
-	
-	if [ "${fullcone_nat}" -eq "1" ];  then
-		revert_fullcone
-		iptables -t nat -A PREROUTING -i "${ifname}" -j FULLCONENAT
-		iptables -t nat -A POSTROUTING -o "${ifname}" -j FULLCONENAT
-	fi
+
+	/etc/init.d/turboacc_fss start
 
 	[ "${sw_flow}" -ne "1" ] && {
 		[ "${sfe_flow}" -eq "1" ] && {
@@ -306,9 +286,8 @@ stop(){
 
 	uci set firewall.@defaults[0].flow_offloading="${sw_flow}"
 	uci set firewall.@defaults[0].flow_offloading_hw="${hw_flow}"
+	uci set firewall.@defaults[0].fullcone="${fullcone_nat}"
 	uci commit firewall
-	
-	[ "${fullcone_nat}" -eq "1" ] || revert_fullcone
 
 	[ "${sfe_flow}" -ne "1" ] && {
 		[ -e "/etc/init.d/shortcut-fe" ] && [ "$(have_ecm_init)" = "0" ] && {
@@ -342,7 +321,7 @@ have_ecm_init() {
 check_status(){
 	case "$1" in
 	"fastpath")
-		if [ "$(cat "/sys/module/nft_flow_offload/refcnt" 2>"/dev/null" || echo 0)" -ne "0" ]; then
+		if [ "$(cat "/sys/module/xt_FLOWOFFLOAD/refcnt" 2>"/dev/null" || echo 0)" -ne "0" ]; then
 			echo -n "Flow Offloading"
 			exit 0
 		elif lsmod | grep -q "ecm"; then
