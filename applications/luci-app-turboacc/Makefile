@@ -25,7 +25,7 @@ LUCI_DEPENDS:=+pdnsd-alt \
 	+PACKAGE_$(PKG_NAME)_INCLUDE_BBR_CCA:kmod-tcp-bbr \
 	+PACKAGE_$(PKG_NAME)_INCLUDE_DNSFORWARDER:dnsforwarder \
 	+PACKAGE_$(PKG_NAME)_INCLUDE_DNSPROXY:dnsproxy \
-	+PACKAGE_$(PKG_NAME)_INCLUDE_OFFLOADING:kmod-nft-offload \
+	+PACKAGE_$(PKG_NAME)_INCLUDE_OFFLOADING:kmod-ipt-offload \
 	+PACKAGE_$(PKG_NAME)_INCLUDE_SHORTCUT_FE:kmod-shortcut-fe-cm \
 	+PACKAGE_$(PKG_NAME)_INCLUDE_SHORTCUT_FE_DRV:kmod-shortcut-fe-drv
 
