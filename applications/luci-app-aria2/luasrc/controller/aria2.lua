@@ -18,10 +18,10 @@ function index()
 		return
 	end
 
-	local page = entry({"admin", "services", "aria2"}, cbi("aria2"), _("Aria2 Settings"))
+	local page = entry({"admin", "nas", "aria2"}, cbi("aria2"), _("Aria2 Settings"))
 	page.dependent = true
 
-	entry({"admin", "services", "aria2", "status"}, call("status")).leaf = true
+	entry({"admin", "nas", "aria2", "status"}, call("status")).leaf = true
 
 end
 
@@ -34,7 +34,8 @@ function status()
 	local status = {
 		running = (sys.call("pidof aria2c > /dev/null") == 0),
 		yaaw = ipkg.installed("yaaw"),
-		webui = ipkg.installed("webui-aria2")
+		webui = ipkg.installed("webui-aria2"),
+		ariang = (ipkg.installed("ariang") or ipkg.installed("ariang-nginx"))
 	}
 
 	http.prepare_content("application/json")

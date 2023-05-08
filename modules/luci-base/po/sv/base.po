@@ -1,18 +1,16 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"PO-Revision-Date: 2014-04-28 09:22+0200\n"
-"Last-Translator: Kristoffer Grundström <hamnisdude@gmail.com>\n"
-"Language-Team: none\n"
+"PO-Revision-Date: 2021-05-19 13:17+0000\n"
+"Last-Translator: Stefan Tamas <tamas79@gmail.com>\n"
+"Language-Team: Swedish <https://hosted.weblate.org/projects/openwrt/luci/sv/"
+">\n"
 "Language: sv\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Pootle 2.0.6\n"
-
-msgid "%.1f dB"
-msgstr ""
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.7-dev\n"
 
 msgid "%s is untagged in multiple VLANs!"
 msgstr "%s är inte taggad i flera VLAN!"
@@ -54,16 +52,16 @@ msgid "15 Minute Load:"
 msgstr "Belastning senaste 15 minutrarna:"
 
 msgid "4-character hexadecimal ID"
-msgstr ""
+msgstr "fyrställigt hexadecimalt ID"
 
 msgid "464XLAT (CLAT)"
-msgstr ""
+msgstr "464XLAT (CLAT)"
 
 msgid "5 Minute Load:"
 msgstr "Belastning senaste 5 minutrarna:"
 
 msgid "6-octet identifier as a hex string - no colons"
-msgstr ""
+msgstr "treställig hexadecimal sträng utan kolon"
 
 msgid "802.11r Fast Transition"
 msgstr "802.11r Snabb förvandling"
@@ -98,7 +96,7 @@ msgid ""
 msgstr ""
 
 msgid "<abbr title=\"Extended Service Set Identifier\">ESSID</abbr>"
-msgstr ""
+msgstr "<abbr title=\"Extended Service Set Identifier\">ESSID</abbr>"
 
 msgid "<abbr title=\"Internet Protocol Version 4\">IPv4</abbr>-Address"
 msgstr "<abbr title=\"Internet Protocol Version 4\">IPv4</abbr>-adress"
@@ -121,19 +119,16 @@ msgid "<abbr title=\"Internet Protocol Version 6\">IPv6</abbr>-Gateway"
 msgstr "<abbr title=\"Internet Protocol Version 6\">IPv6</abbr>-gateway"
 
 msgid "<abbr title=\"Internet Protocol Version 6\">IPv6</abbr>-Suffix (hex)"
-msgstr ""
+msgstr "<abbr title=\"Internet Protocol Version 6\">IPv6</abbr>Suffix (hex)"
 
 msgid "<abbr title=\"Light Emitting Diode\">LED</abbr> Configuration"
 msgstr "<abbr title=\"Lysdiod\">LED</abbr>-konfiguration"
 
 msgid "<abbr title=\"Light Emitting Diode\">LED</abbr> Name"
-msgstr ""
+msgstr "<abbr title=\"Light Emitting Diode\">LED</abbr>Namn"
 
 msgid "<abbr title=\"Media Access Control\">MAC</abbr>-Address"
-msgstr ""
-
-msgid "<abbr title=\"The DHCP Unique Identifier\">DUID</abbr>"
-msgstr ""
+msgstr "<abbr title=\"Media Access Control\">MAC</abbr>Address"
 
 msgid ""
 "<abbr title=\"maximal\">Max.</abbr> <abbr title=\"Dynamic Host Configuration "
@@ -144,6 +139,8 @@ msgid ""
 "<abbr title=\"maximal\">Max.</abbr> <abbr title=\"Extension Mechanisms for "
 "Domain Name System\">EDNS0</abbr> packet size"
 msgstr ""
+"<abbr title=\"maximal\">Max.</abbr><abbr title=\"Extension Mechanisms for "
+"Domain Name System\">EDNS0</abbr>paketstorlek"
 
 msgid "<abbr title=\"maximal\">Max.</abbr> concurrent queries"
 msgstr ""
@@ -168,7 +165,7 @@ msgid "ADSL"
 msgstr "ADSL"
 
 msgid "AICCU (SIXXS)"
-msgstr "AICCU (SIXXS)"
+msgstr ""
 
 msgid "ANSI T1.413"
 msgstr "ANSI T1.413"
@@ -198,19 +195,22 @@ msgid ""
 msgstr ""
 
 msgid "ATM device number"
-msgstr ""
+msgstr "ATM enhetsnummer"
 
 msgid "ATU-C System Vendor ID"
 msgstr ""
 
 msgid "AYIYA"
-msgstr "AYIYA"
+msgstr ""
 
 msgid "Access Concentrator"
 msgstr ""
 
 msgid "Access Point"
 msgstr "Accesspunkt"
+
+msgid "Action"
+msgstr ""
 
 msgid "Actions"
 msgstr "Åtgärder"
@@ -240,10 +240,10 @@ msgid "Add"
 msgstr "Lägg till"
 
 msgid "Add local domain suffix to names served from hosts files"
-msgstr ""
+msgstr "Lägg till lokala domänsuffix i namn från host-filer"
 
 msgid "Add new interface..."
-msgstr "Lägg till ett nytt gränssnitt"
+msgstr "Lägg till ett nytt gränssnitt..."
 
 msgid "Additional Hosts files"
 msgstr "Ytterligare värdfiler"
@@ -283,9 +283,6 @@ msgstr "Tillåt <abbr title=\"Secure Shell\">SSH</abbr> lösenordsautentisering"
 
 msgid "Allow all except listed"
 msgstr "Tillåt alla utom listade"
-
-msgid "Allow legacy 802.11b rates"
-msgstr ""
 
 msgid "Allow listed only"
 msgstr "Tillåt enbart listade"
@@ -395,10 +392,10 @@ msgid "Any zone"
 msgstr "Någon zon"
 
 msgid "Apply"
-msgstr "Verkställ"
+msgstr ""
 
 msgid "Applying changes"
-msgstr "Verkställer ändringar"
+msgstr ""
 
 msgid ""
 "Assign a part of given length of every public IPv6-prefix to this interface"
@@ -493,7 +490,7 @@ msgid "Backup / Flash Firmware"
 msgstr "Säkerhetskopiera / Flasha inre mjukvara"
 
 msgid "Backup / Restore"
-msgstr "Säkerhetskopiera / Återställ"
+msgstr ""
 
 msgid "Backup file list"
 msgstr "Säkerhetskopiera fillista"
@@ -505,7 +502,7 @@ msgid "Band"
 msgstr "Band"
 
 msgid "Behind NAT"
-msgstr "Bakom NAT"
+msgstr ""
 
 msgid ""
 "Below is the determined list of files to backup. It consists of changed "
@@ -554,6 +551,9 @@ msgid ""
 "preserved in any sysupgrade."
 msgstr ""
 
+msgid "Buttons"
+msgstr ""
+
 msgid "CA certificate; if empty it will be saved after the first connection."
 msgstr ""
 "CA-certifikat; om tom så kommer den att sparas efter första anslutningen."
@@ -585,8 +585,8 @@ msgstr "Kanal"
 msgid "Check"
 msgstr "Kontrollera"
 
-msgid "Check filesystems before mount"
-msgstr "Kontrollera filsystemen innan de monteras"
+msgid "Check fileystems before mount"
+msgstr ""
 
 msgid "Check this option to delete the existing networks from this radio."
 msgstr ""
@@ -643,18 +643,11 @@ msgstr "Kommando"
 msgid "Common Configuration"
 msgstr "Vanlig konfiguration"
 
-msgid ""
-"Complicates key reinstallation attacks on the client side by disabling "
-"retransmission of EAPOL-Key frames that are used to install keys. This "
-"workaround might cause interoperability issues and reduced robustness of key "
-"negotiation especially in environments with heavy traffic load."
-msgstr ""
-
 msgid "Configuration"
 msgstr "Konfiguration"
 
 msgid "Configuration applied."
-msgstr "Konfigurationen tillämpades"
+msgstr ""
 
 msgid "Configuration files will be kept."
 msgstr "Konfigurationsfiler kommer att behållas."
@@ -719,11 +712,6 @@ msgid "Custom feeds"
 msgstr "Anpassade flöden"
 
 msgid ""
-"Custom files (certificates, scripts) may remain on the system. To prevent "
-"this, perform a factory-reset first."
-msgstr ""
-
-msgid ""
 "Customizes the behaviour of the device <abbr title=\"Light Emitting Diode"
 "\">LED</abbr>s if possible."
 msgstr ""
@@ -765,7 +753,7 @@ msgid "DNS-Label / FQDN"
 msgstr ""
 
 msgid "DNSSEC"
-msgstr ""
+msgstr "DNSSEC"
 
 msgid "DNSSEC check unsigned"
 msgstr ""
@@ -786,13 +774,13 @@ msgid "DSL line mode"
 msgstr ""
 
 msgid "DUID"
-msgstr ""
+msgstr "DUID"
 
 msgid "Data Rate"
 msgstr "Datahastighet"
 
 msgid "Debug"
-msgstr "Avlusa"
+msgstr "Felsök"
 
 msgid "Default %d"
 msgstr "Standard %d"
@@ -804,10 +792,10 @@ msgid "Default is stateless + stateful"
 msgstr ""
 
 msgid "Default route"
-msgstr "Standardrutt"
+msgstr ""
 
 msgid "Default state"
-msgstr ""
+msgstr "Standardläge"
 
 msgid "Define a name for this network."
 msgstr "Ange ett namn för det här nätverket."
@@ -843,10 +831,10 @@ msgid "Device is rebooting..."
 msgstr "Enheten startar om..."
 
 msgid "Device unreachable"
-msgstr "Enheten kan inte nås"
+msgstr ""
 
 msgid "Diagnostics"
-msgstr ""
+msgstr "Diagnostik"
 
 msgid "Dial number"
 msgstr "Slå nummer"
@@ -886,7 +874,7 @@ msgid "Distance Optimization"
 msgstr "Avståndsoptimering"
 
 msgid "Distance to farthest network member in meters."
-msgstr "Avstånd till nätverksmledlemmen längst bort i metrar."
+msgstr "Avstånd till nätverksmedlemmen längst bort i metrar."
 
 msgid "Distribution feeds"
 msgstr ""
@@ -934,9 +922,6 @@ msgstr "Ladda ner och installera paket"
 msgid "Download backup"
 msgstr "Ladda ner säkerhetskopia"
 
-msgid "Downstream SNR offset"
-msgstr ""
-
 msgid "Dropbear Instance"
 msgstr "Dropbear-instans"
 
@@ -950,6 +935,7 @@ msgstr ""
 
 msgid "Dynamic <abbr title=\"Dynamic Host Configuration Protocol\">DHCP</abbr>"
 msgstr ""
+"Dynamisk <abbr title=\"Dynamic Host Configuration Protocol\">DHCP</abbr>"
 
 msgid "Dynamic tunnel"
 msgstr "Dynamisk tunnel"
@@ -985,11 +971,6 @@ msgstr "Nödsituation"
 msgid "Enable"
 msgstr "Aktivera"
 
-msgid ""
-"Enable <abbr title=\"Internet Group Management Protocol\">IGMP</abbr> "
-"snooping"
-msgstr ""
-
 msgid "Enable <abbr title=\"Spanning Tree Protocol\">STP</abbr>"
 msgstr "Aktivera <abbr title=\"Spanning Tree Protocol\">STP</abbr>"
 
@@ -1018,19 +999,16 @@ msgid "Enable VLAN functionality"
 msgstr "Aktivera VLAN-funktionalitet"
 
 msgid "Enable WPS pushbutton, requires WPA(2)-PSK"
-msgstr "Aktivera WPS-tryckknapp, kräver WPA(2)-PSK"
-
-msgid "Enable key reinstallation (KRACK) countermeasures"
-msgstr "Kräver ominstallation av nyckel (KRACK) motåtgärder"
+msgstr ""
 
 msgid "Enable learning and aging"
 msgstr ""
 
 msgid "Enable mirroring of incoming packets"
-msgstr ""
+msgstr "Aktivera spegling av inkommande paket"
 
 msgid "Enable mirroring of outgoing packets"
-msgstr ""
+msgstr "Aktivera spegling av utgående paket"
 
 msgid "Enable the DF (Don't Fragment) flag of the encapsulating packets."
 msgstr ""
@@ -1046,9 +1024,6 @@ msgstr "Aktivera/Inaktivera"
 
 msgid "Enabled"
 msgstr "Aktiverad"
-
-msgid "Enables IGMP snooping on this bridge"
-msgstr ""
 
 msgid ""
 "Enables fast roaming among access points that belong to the same Mobility "
@@ -1119,15 +1094,6 @@ msgstr ""
 msgid "Extra SSH command options"
 msgstr "Extra alternativ för SSH-kommandot"
 
-msgid "FT over DS"
-msgstr ""
-
-msgid "FT over the Air"
-msgstr ""
-
-msgid "FT protocol"
-msgstr ""
-
 msgid "File"
 msgstr "Fil"
 
@@ -1164,7 +1130,7 @@ msgid "Firewall"
 msgstr "Brandvägg"
 
 msgid "Firewall Mark"
-msgstr ""
+msgstr "Brandväggsmarkering"
 
 msgid "Firewall Settings"
 msgstr "Inställningar för brandvägg"
@@ -1173,10 +1139,10 @@ msgid "Firewall Status"
 msgstr "Status för brandvägg"
 
 msgid "Firmware File"
-msgstr ""
+msgstr "Fil för inbyggd programvara"
 
 msgid "Firmware Version"
-msgstr "Version för inre mjukvara"
+msgstr "Firmware Version"
 
 msgid "Fixed source port for outbound DNS queries"
 msgstr ""
@@ -1229,9 +1195,6 @@ msgstr ""
 msgid "Forward broadcast traffic"
 msgstr ""
 
-msgid "Forward mesh peer traffic"
-msgstr ""
-
 msgid "Forwarding mode"
 msgstr "Vidarebefordringsläge"
 
@@ -1249,7 +1212,7 @@ msgstr "Fritt utrymme"
 
 msgid ""
 "Further information about WireGuard interfaces and peers at <a href=\"http://"
-"wireguard.io\">wireguard.io</a>."
+"wireguard.com\">wireguard.com</a>."
 msgstr ""
 
 msgid "GHz"
@@ -1262,22 +1225,19 @@ msgid "Gateway"
 msgstr "Gateway"
 
 msgid "Gateway ports"
-msgstr "Gateway-portar"
+msgstr ""
 
 msgid "General Settings"
 msgstr "Generella inställningar"
 
 msgid "General Setup"
-msgstr ""
+msgstr "Allmän inställning"
 
 msgid "General options for opkg"
 msgstr "Generella alternativ för opkg"
 
 msgid "Generate Config"
 msgstr "Generera konfig"
-
-msgid "Generate PMK locally"
-msgstr ""
 
 msgid "Generate archive"
 msgstr "Generera arkiv"
@@ -1315,6 +1275,9 @@ msgstr "HE.net-användarnamn"
 msgid "HT mode (802.11n)"
 msgstr "HT-läge (802.11n)"
 
+msgid "Handler"
+msgstr ""
+
 msgid "Hang Up"
 msgstr "Lägg på"
 
@@ -1322,12 +1285,14 @@ msgid "Header Error Code Errors (HEC)"
 msgstr ""
 
 msgid "Heartbeat"
-msgstr "Hjärtslag"
+msgstr ""
 
 msgid ""
 "Here you can configure the basic aspects of your device like its hostname or "
 "the timezone."
 msgstr ""
+"Här kan du konfigurera grundläggande enhetsinställningar, så som värdnamn "
+"eller tidszon."
 
 msgid ""
 "Here you can paste public SSH-Keys (one per line) for SSH public-key "
@@ -1481,7 +1446,7 @@ msgstr "IPv6-över-IPv4 (6till4)"
 msgid "Identity"
 msgstr "Identitet"
 
-msgid "If checked, 1DES is enabled"
+msgid "If checked, 1DES is enaled"
 msgstr ""
 
 msgid "If checked, encryption is disabled"
@@ -1534,7 +1499,7 @@ msgid "Inactivity timeout"
 msgstr ""
 
 msgid "Inbound:"
-msgstr "Ankommande"
+msgstr "Inkommande:"
 
 msgid "Info"
 msgstr "Info"
@@ -1591,7 +1556,7 @@ msgid "Interface shut down"
 msgstr "Gränssnittet stängdes ner"
 
 msgid "Interfaces"
-msgstr "Gränssnitten"
+msgstr "Gränssnitt"
 
 msgid "Internal"
 msgstr "Interna"
@@ -1758,7 +1723,7 @@ msgid "Listen Interfaces"
 msgstr ""
 
 msgid "Listen Port"
-msgstr "Lyssningsportar"
+msgstr "Lyssningsport"
 
 msgid "Listen only on the given interface or, if unspecified, on all"
 msgstr ""
@@ -1826,7 +1791,7 @@ msgid "Log queries"
 msgstr ""
 
 msgid "Logging"
-msgstr ""
+msgstr "Loggning"
 
 msgid "Login"
 msgstr "Logga in"
@@ -1890,6 +1855,9 @@ msgstr ""
 msgid "Maximum amount of seconds to wait for the modem to become ready"
 msgstr ""
 
+msgid "Maximum hold time"
+msgstr ""
+
 msgid ""
 "Maximum length of the name is 15 characters including the automatic protocol/"
 "bridge prefix (br-, 6in4-, pppoe- etc.)"
@@ -1907,11 +1875,11 @@ msgstr "Minne"
 msgid "Memory usage (%)"
 msgstr "Minnesanvändning (%)"
 
-msgid "Mesh Id"
-msgstr ""
-
 msgid "Metric"
 msgstr "Metrisk"
+
+msgid "Minimum hold time"
+msgstr ""
 
 msgid "Mirror monitor port"
 msgstr ""
@@ -2033,7 +2001,7 @@ msgid "Network boot image"
 msgstr "Uppstartsbild för nätverket"
 
 msgid "Network without interfaces."
-msgstr "Nätverk utan gränssnitt"
+msgstr "Nätverk utan gränssnitt."
 
 msgid "Next »"
 msgstr "Nästa »"
@@ -2069,7 +2037,7 @@ msgid "No password set!"
 msgstr "Inget lösenord inställt!"
 
 msgid "No rules in this chain"
-msgstr "Inga regler i den här kedjan"
+msgstr ""
 
 msgid "No zone assigned"
 msgstr ""
@@ -2115,9 +2083,6 @@ msgstr "Avisering"
 
 msgid "Nslookup"
 msgstr "Nslookup"
-
-msgid "Number of cached DNS entries (max is 10000, 0 is no caching)"
-msgstr ""
 
 msgid "OK"
 msgstr "OK"
@@ -2231,7 +2196,7 @@ msgid "Out"
 msgstr "Ut"
 
 msgid "Outbound:"
-msgstr "Utgående"
+msgstr "Utgående:"
 
 msgid "Output Interface"
 msgstr ""
@@ -2352,6 +2317,9 @@ msgstr "Genväg till klient-certifikat"
 msgid "Path to Private Key"
 msgstr "Genväg till privat nyckel"
 
+msgid "Path to executable which handles the button event"
+msgstr ""
+
 msgid "Path to inner CA-Certificate"
 msgstr "Genväg till det inre CA-certifikatet"
 
@@ -2398,7 +2366,7 @@ msgid "Please enter your username and password."
 msgstr "Vänligen ange ditt användarnamn och lösenord."
 
 msgid "Policy"
-msgstr ""
+msgstr "Villkor"
 
 msgid "Port"
 msgstr "Port"
@@ -2595,7 +2563,7 @@ msgid "Receiver Antenna"
 msgstr "Mottagningsantenn"
 
 msgid "Recommended. IP addresses of the WireGuard interface."
-msgstr "Rekommenderad. WireGuard-gränssnittets IP-adress"
+msgstr "Rekommenderad. WireGuard-gränssnittets IP-adresser."
 
 msgid "Reconnect this interface"
 msgstr "Återanslut det här gränssnittet"
@@ -2643,10 +2611,10 @@ msgid "Request IPv6-prefix of length"
 msgstr ""
 
 msgid "Require TLS"
-msgstr "Kräv TLS"
+msgstr ""
 
 msgid "Required"
-msgstr "Krävs!"
+msgstr "Nödvändig"
 
 msgid "Required for certain ISPs, e.g. Charter with DOCSIS 3"
 msgstr ""
@@ -2780,7 +2748,7 @@ msgid "Save & Apply"
 msgstr "Spara och Verkställ"
 
 msgid "Save &#38; Apply"
-msgstr "Spara &#38; Verkställ"
+msgstr ""
 
 msgid "Scan"
 msgstr "Skanna"
@@ -2806,10 +2774,10 @@ msgid "Separate Clients"
 msgstr "Separera klienter"
 
 msgid "Server Settings"
-msgstr "Inställningar för server"
+msgstr "Server-inställningar"
 
 msgid "Server password"
-msgstr "Lösenordet för servern"
+msgstr ""
 
 msgid ""
 "Server password, enter the specific password of the tunnel when the username "
@@ -2817,7 +2785,7 @@ msgid ""
 msgstr ""
 
 msgid "Server username"
-msgstr "Användarnamnet för servern"
+msgstr ""
 
 msgid "Service Name"
 msgstr "Namn på tjänst"
@@ -2869,9 +2837,6 @@ msgstr "Storlek"
 msgid "Size (.ipk)"
 msgstr "Storlek (.ipk)"
 
-msgid "Size of DNS query cache"
-msgstr ""
-
 msgid "Skip"
 msgstr "Hoppa över"
 
@@ -2914,6 +2879,9 @@ msgstr "Källa"
 msgid "Source routing"
 msgstr ""
 
+msgid "Specifies the button state to handle"
+msgstr ""
+
 msgid "Specifies the directory the device is attached to"
 msgstr ""
 
@@ -2947,7 +2915,7 @@ msgid "Specify the secret encryption key here."
 msgstr "Ange den hemliga krypteringsnyckeln här."
 
 msgid "Start"
-msgstr ""
+msgstr "Starta"
 
 msgid "Start priority"
 msgstr ""
@@ -2980,7 +2948,7 @@ msgid "Status"
 msgstr "Status"
 
 msgid "Stop"
-msgstr ""
+msgstr "Stopp"
 
 msgid "Strict order"
 msgstr "Strikt sortering"
@@ -3011,9 +2979,6 @@ msgstr "Byt %q (%s)"
 
 msgid ""
 "Switch %q has an unknown topology - the VLAN settings might not be accurate."
-msgstr ""
-
-msgid "Switch Port Mask"
 msgstr ""
 
 msgid "Switch VLAN"
@@ -3119,7 +3084,7 @@ msgid ""
 msgstr ""
 
 msgid "The following changes have been committed"
-msgstr "Följande ändringar har skickats in"
+msgstr ""
 
 msgid "The following changes have been reverted"
 msgstr ""
@@ -3187,7 +3152,7 @@ msgid "There are no active leases."
 msgstr "Det finns inga aktiva kontrakt."
 
 msgid "There are no pending changes to apply!"
-msgstr "Det finns inga pendlande ändringar att verkställa!"
+msgstr ""
 
 msgid "There are no pending changes to revert!"
 msgstr "Det finns inga pendlande ändringar att återkalla"
@@ -3204,8 +3169,6 @@ msgid ""
 "There is no password set on this router. Please configure a root password to "
 "protect the web interface and enable SSH."
 msgstr ""
-"Det finns inget lösenord inställt på den här routern. Vänligen ställ in ett "
-"root-lösenord för att skydda webbgränssnittet och för att aktivera SSH."
 
 msgid "This IPv4 address of the relay"
 msgstr ""
@@ -3234,7 +3197,7 @@ msgstr ""
 
 msgid ""
 "This is the local endpoint address assigned by the tunnel broker, it usually "
-"ends with <code>...:2/64</code>"
+"ends with <code>:2</code>"
 msgstr ""
 
 msgid ""
@@ -3261,11 +3224,14 @@ msgid ""
 "their status."
 msgstr ""
 
+msgid "This page allows the configuration of custom button actions"
+msgstr ""
+
 msgid "This page gives an overview over currently active network connections."
 msgstr ""
 
 msgid "This section contains no values yet"
-msgstr ""
+msgstr "Den här sektionen innehåller inga värden ännu"
 
 msgid "Time Synchronization"
 msgstr "Synkronisering av tid"
@@ -3280,8 +3246,6 @@ msgid ""
 "To restore configuration files, you can upload a previously generated backup "
 "archive here."
 msgstr ""
-"För att återställa konfigurationsfiler så kan du ladda upp ett tidigare "
-"genererat säkerhetskopierings arkiv här."
 
 msgid "Tone"
 msgstr "Ton"
@@ -3332,7 +3296,7 @@ msgid "Tunnel setup server"
 msgstr ""
 
 msgid "Tunnel type"
-msgstr "Tunnel-typ"
+msgstr ""
 
 msgid "Tx-Power"
 msgstr ""
@@ -3444,9 +3408,9 @@ msgstr ""
 
 msgid ""
 "Use the <em>Add</em> Button to add a new lease entry. The <em>MAC-Address</"
-"em> identifies the host, the <em>IPv4-Address</em> specifies the fixed "
-"address to use, and the <em>Hostname</em> is assigned as a symbolic name to "
-"the requesting host. The optional <em>Lease time</em> can be used to set non-"
+"em> indentifies the host, the <em>IPv4-Address</em> specifies to the fixed "
+"address to use and the <em>Hostname</em> is assigned as symbolic name to the "
+"requesting host. The optional <em>Lease time</em> can be used to set non-"
 "standard host-specific lease time, e.g. 12h, 3d or infinite."
 msgstr ""
 
@@ -3507,7 +3471,7 @@ msgid "Vendor Class to send when requesting DHCP"
 msgstr ""
 
 msgid "Verbose"
-msgstr "Utförlig"
+msgstr ""
 
 msgid "Verbose logging by aiccu daemon"
 msgstr ""
@@ -3549,10 +3513,10 @@ msgid "Waiting for changes to be applied..."
 msgstr "Väntar på att ändringarna ska tillämpas..."
 
 msgid "Waiting for command to complete..."
-msgstr "Väntar på att kommandot ska avsluta..."
+msgstr "Väntar på att kommandot ska slutföras..."
 
 msgid "Waiting for device..."
-msgstr "Väntar på enheten..."
+msgstr "Väntar på enhet..."
 
 msgid "Warning"
 msgstr "Varning"
@@ -3560,11 +3524,6 @@ msgstr "Varning"
 msgid "Warning: There are unsaved changes that will get lost on reboot!"
 msgstr ""
 "Varning: Det finns osparade ändringar som kommer att förloras vid omstart!"
-
-msgid ""
-"When using a PSK, the PMK can be generated locally without inter AP "
-"communications"
-msgstr ""
 
 msgid "Whether to create an IPv6 default route over the tunnel"
 msgstr ""
@@ -3594,7 +3553,7 @@ msgid "Wireless Security"
 msgstr "Trådlös säkerhet"
 
 msgid "Wireless is disabled or not associated"
-msgstr "Trådlöst är avstängt eller inte associerat"
+msgstr ""
 
 msgid "Wireless is restarting..."
 msgstr "Trådlöst startar om..."
@@ -3663,13 +3622,13 @@ msgid "dBm"
 msgstr "dBm"
 
 msgid "disable"
-msgstr "stäng ner"
+msgstr "inaktivera"
 
 msgid "disabled"
-msgstr "avstängd"
+msgstr "inaktiverad"
 
 msgid "expired"
-msgstr ""
+msgstr "slutade gälla"
 
 msgid ""
 "file where given <abbr title=\"Dynamic Host Configuration Protocol\">DHCP</"
@@ -3725,7 +3684,7 @@ msgid "no link"
 msgstr "ingen länk"
 
 msgid "none"
-msgstr ""
+msgstr "inga"
 
 msgid "not present"
 msgstr "inte tillgängligt"
@@ -3740,9 +3699,6 @@ msgid "open"
 msgstr "öppen"
 
 msgid "overlay"
-msgstr ""
-
-msgid "random"
 msgstr ""
 
 msgid "relay mode"
@@ -3773,10 +3729,10 @@ msgid "unknown"
 msgstr "okänd"
 
 msgid "unlimited"
-msgstr "obegränsat"
+msgstr "obegränsad"
 
 msgid "unspecified"
-msgstr "ospecifierat"
+msgstr "ospecificerad"
 
 msgid "unspecified -or- create:"
 msgstr "ospecifierat -eller- skapa:"
@@ -3789,9 +3745,3 @@ msgstr "ja"
 
 msgid "« Back"
 msgstr "« Bakåt"
-
-#~ msgid "Action"
-#~ msgstr "Åtgärd"
-
-#~ msgid "Buttons"
-#~ msgstr "Knappar"

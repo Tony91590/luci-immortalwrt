@@ -10,10 +10,10 @@ function index()
 
 	local page
 
-	page = entry({"admin", "services", "minidlna"}, cbi("minidlna"), _("miniDLNA"))
+	page = entry({"admin", "nas", "minidlna"}, cbi("minidlna"), _("miniDLNA"))
 	page.dependent = true
 
-	entry({"admin", "services", "minidlna_status"}, call("minidlna_status"))
+	entry({"admin", "nas", "minidlna_status"}, call("minidlna_status"))
 end
 
 function minidlna_status()
@@ -22,7 +22,7 @@ function minidlna_status()
 	local port = tonumber(uci:get_first("minidlna", "minidlna", "port"))
 
 	local status = {
-		running = (sys.call("pidof minidlna >/dev/null") == 0),
+		running = (sys.call("pidof minidlnad >/dev/null") == 0),
 		audio   = 0,
 		video   = 0,
 		image   = 0

@@ -1,12 +1,16 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
-"Language: \n"
+"PO-Revision-Date: 2020-01-14 15:22+0000\n"
+"Last-Translator: Franco Castillo <castillofrancodamian@gmail.com>\n"
+"Language-Team: Malay <https://hosted.weblate.org/projects/openwrt/"
+"luciapplicationsopenvpn/ms/>\n"
+"Language: ms\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Weblate 3.11-dev\n"
 
 msgid "%s"
 msgstr ""
@@ -119,13 +123,7 @@ msgstr ""
 msgid "Disable Paging"
 msgstr ""
 
-msgid "Disable cipher initialisation vector"
-msgstr ""
-
 msgid "Disable options consistency check"
-msgstr ""
-
-msgid "Disable replay protection"
 msgstr ""
 
 msgid "Do not bind to local address and port"
@@ -150,12 +148,6 @@ msgid "Don't pull routes automatically"
 msgstr ""
 
 msgid "Don't re-read key on restart"
-msgstr ""
-
-msgid "Don't require client certificate"
-msgstr ""
-
-msgid "Don't use adaptive lzo compression"
 msgstr ""
 
 msgid "Don't warn on ifconfig inconsistencies"
@@ -266,9 +258,6 @@ msgstr ""
 msgid "Major mode"
 msgstr ""
 
-msgid "Make tun device IPv6 capable"
-msgstr ""
-
 msgid "Maximum number of queued TCP output packets"
 msgstr ""
 
@@ -285,7 +274,7 @@ msgid "Only process ping timeouts if routes exist"
 msgstr ""
 
 msgid "OpenVPN"
-msgstr ""
+msgstr "OpenVPN"
 
 msgid "OpenVPN instances"
 msgstr ""
@@ -507,12 +496,6 @@ msgid "Timeframe for key exchange"
 msgstr ""
 
 msgid "Type of used device"
-msgstr ""
-
-msgid "Use fast LZO compression"
-msgstr ""
-
-msgid "Use individual addresses rather than /30 subnets"
 msgstr ""
 
 msgid "Use protocol"

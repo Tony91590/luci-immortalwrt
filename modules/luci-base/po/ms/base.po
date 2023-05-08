@@ -1,20 +1,17 @@
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-05-07 17:57+1000\n"
-"PO-Revision-Date: 2010-05-07 17:57+1000\n"
-"Last-Translator: Wai Chet Teow <waichet@hotmail.com>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"PO-Revision-Date: 2020-01-14 15:21+0000\n"
+"Last-Translator: Franco Castillo <castillofrancodamian@gmail.com>\n"
+"Language-Team: Malay <https://hosted.weblate.org/projects/openwrt/luci/ms/>\n"
+"Language: ms\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Translate Toolkit 1.1.1\n"
-
-msgid "%.1f dB"
-msgstr ""
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Weblate 3.11-dev\n"
 
 msgid "%s is untagged in multiple VLANs!"
 msgstr ""
@@ -132,9 +129,6 @@ msgstr ""
 msgid "<abbr title=\"Media Access Control\">MAC</abbr>-Address"
 msgstr "MAC-Alamat"
 
-msgid "<abbr title=\"The DHCP Unique Identifier\">DUID</abbr>"
-msgstr ""
-
 msgid ""
 "<abbr title=\"maximal\">Max.</abbr> <abbr title=\"Dynamic Host Configuration "
 "Protocol\">DHCP</abbr> leases"
@@ -163,16 +157,16 @@ msgid "A43C + J43 + A43 + V43"
 msgstr ""
 
 msgid "ADSL"
-msgstr ""
+msgstr "ADSL"
 
 msgid "AICCU (SIXXS)"
 msgstr ""
 
 msgid "ANSI T1.413"
-msgstr ""
+msgstr "ANSI T1.413"
 
 msgid "APN"
-msgstr ""
+msgstr "APN"
 
 msgid "ARP retry threshold"
 msgstr ""
@@ -209,6 +203,9 @@ msgstr ""
 
 msgid "Access Point"
 msgstr "Pusat akses"
+
+msgid "Action"
+msgstr "Aksi"
 
 msgid "Actions"
 msgstr "Aksi"
@@ -280,9 +277,6 @@ msgstr "Membenarkan pengesahan kata laluan SSH"
 
 msgid "Allow all except listed"
 msgstr "Izinkan semua kecualian yang disenaraikan"
-
-msgid "Allow legacy 802.11b rates"
-msgstr ""
 
 msgid "Allow listed only"
 msgstr "Izinkan senarai saja"
@@ -458,16 +452,16 @@ msgid "Average:"
 msgstr ""
 
 msgid "B43 + B43C"
-msgstr ""
+msgstr "B43 + B43C"
 
 msgid "B43 + B43C + V43"
-msgstr ""
+msgstr "B43 + B43C + V43"
 
 msgid "BR / DMR / AFTR"
-msgstr ""
+msgstr "BR / DMR / AFTR"
 
 msgid "BSSID"
-msgstr ""
+msgstr "BSSID"
 
 msgid "Back"
 msgstr ""
@@ -549,6 +543,9 @@ msgid ""
 "preserved in any sysupgrade."
 msgstr ""
 
+msgid "Buttons"
+msgstr "Butang"
+
 msgid "CA certificate; if empty it will be saved after the first connection."
 msgstr ""
 
@@ -579,7 +576,7 @@ msgstr "Saluran"
 msgid "Check"
 msgstr ""
 
-msgid "Check filesystems before mount"
+msgid "Check fileystems before mount"
 msgstr ""
 
 msgid "Check this option to delete the existing networks from this radio."
@@ -612,7 +609,6 @@ msgid ""
 "\"Perform reset\" (only possible with squashfs images)."
 msgstr ""
 
-#, fuzzy
 msgid "Client"
 msgstr "Pelanggan"
 
@@ -628,19 +624,12 @@ msgid "Close list..."
 msgstr ""
 
 msgid "Collecting data..."
-msgstr ""
+msgstr "Mengumpul data..."
 
 msgid "Command"
 msgstr "Perintah"
 
 msgid "Common Configuration"
-msgstr ""
-
-msgid ""
-"Complicates key reinstallation attacks on the client side by disabling "
-"retransmission of EAPOL-Key frames that are used to install keys. This "
-"workaround might cause interoperability issues and reduced robustness of key "
-"negotiation especially in environments with heavy traffic load."
 msgstr ""
 
 msgid "Configuration"
@@ -712,11 +701,6 @@ msgid "Custom feeds"
 msgstr ""
 
 msgid ""
-"Custom files (certificates, scripts) may remain on the system. To prevent "
-"this, perform a factory-reset first."
-msgstr ""
-
-msgid ""
 "Customizes the behaviour of the device <abbr title=\"Light Emitting Diode"
 "\">LED</abbr>s if possible."
 msgstr "Mengkustomisasi perilaku peranti LED jika mungkin."
@@ -770,7 +754,7 @@ msgid "DS-Lite AFTR address"
 msgstr ""
 
 msgid "DSL"
-msgstr ""
+msgstr "DSL"
 
 msgid "DSL Status"
 msgstr ""
@@ -779,7 +763,7 @@ msgid "DSL line mode"
 msgstr ""
 
 msgid "DUID"
-msgstr ""
+msgstr "DUID"
 
 msgid "Data Rate"
 msgstr ""
@@ -926,9 +910,6 @@ msgstr "Turun dan memasang pakej"
 msgid "Download backup"
 msgstr ""
 
-msgid "Downstream SNR offset"
-msgstr ""
-
 msgid "Dropbear Instance"
 msgstr ""
 
@@ -978,11 +959,6 @@ msgstr ""
 msgid "Enable"
 msgstr ""
 
-msgid ""
-"Enable <abbr title=\"Internet Group Management Protocol\">IGMP</abbr> "
-"snooping"
-msgstr ""
-
 msgid "Enable <abbr title=\"Spanning Tree Protocol\">STP</abbr>"
 msgstr "Mengaktifkan <abbr title=\"Spanning Tree Protocol\">STP</abbr>"
 
@@ -1013,9 +989,6 @@ msgstr ""
 msgid "Enable WPS pushbutton, requires WPA(2)-PSK"
 msgstr ""
 
-msgid "Enable key reinstallation (KRACK) countermeasures"
-msgstr ""
-
 msgid "Enable learning and aging"
 msgstr ""
 
@@ -1038,9 +1011,6 @@ msgid "Enable/Disable"
 msgstr ""
 
 msgid "Enabled"
-msgstr ""
-
-msgid "Enables IGMP snooping on this bridge"
 msgstr ""
 
 msgid ""
@@ -1110,15 +1080,6 @@ msgid "External system log server protocol"
 msgstr ""
 
 msgid "Extra SSH command options"
-msgstr ""
-
-msgid "FT over DS"
-msgstr ""
-
-msgid "FT over the Air"
-msgstr ""
-
-msgid "FT protocol"
 msgstr ""
 
 msgid "File"
@@ -1222,9 +1183,6 @@ msgstr ""
 msgid "Forward broadcast traffic"
 msgstr ""
 
-msgid "Forward mesh peer traffic"
-msgstr ""
-
 msgid "Forwarding mode"
 msgstr ""
 
@@ -1242,11 +1200,11 @@ msgstr ""
 
 msgid ""
 "Further information about WireGuard interfaces and peers at <a href=\"http://"
-"wireguard.io\">wireguard.io</a>."
+"wireguard.com\">wireguard.com</a>."
 msgstr ""
 
 msgid "GHz"
-msgstr ""
+msgstr "GHz"
 
 msgid "GPRS only"
 msgstr ""
@@ -1267,9 +1225,6 @@ msgid "General options for opkg"
 msgstr ""
 
 msgid "Generate Config"
-msgstr ""
-
-msgid "Generate PMK locally"
 msgstr ""
 
 msgid "Generate archive"
@@ -1307,6 +1262,9 @@ msgstr ""
 
 msgid "HT mode (802.11n)"
 msgstr ""
+
+msgid "Handler"
+msgstr "Kawalan"
 
 msgid "Hang Up"
 msgstr "Menutup"
@@ -1369,7 +1327,7 @@ msgid "IP address"
 msgstr "Alamat IP"
 
 msgid "IPv4"
-msgstr ""
+msgstr "IPv4"
 
 msgid "IPv4 Firewall"
 msgstr ""
@@ -1476,7 +1434,7 @@ msgstr ""
 msgid "Identity"
 msgstr "Identiti"
 
-msgid "If checked, 1DES is enabled"
+msgid "If checked, 1DES is enaled"
 msgstr ""
 
 msgid "If checked, encryption is disabled"
@@ -1862,13 +1820,13 @@ msgid "MB/s"
 msgstr ""
 
 msgid "MD5"
-msgstr ""
+msgstr "MD5"
 
 msgid "MHz"
-msgstr ""
+msgstr "MHz"
 
 msgid "MTU"
-msgstr ""
+msgstr "MTU"
 
 msgid ""
 "Make sure to clone the root filesystem using something like the commands "
@@ -1893,6 +1851,10 @@ msgstr ""
 msgid "Maximum amount of seconds to wait for the modem to become ready"
 msgstr ""
 
+#, fuzzy
+msgid "Maximum hold time"
+msgstr "Memegang masa maksimum"
+
 msgid ""
 "Maximum length of the name is 15 characters including the automatic protocol/"
 "bridge prefix (br-, 6in4-, pppoe- etc.)"
@@ -1910,11 +1872,12 @@ msgstr "Memori"
 msgid "Memory usage (%)"
 msgstr "Penggunaan Memori (%)"
 
-msgid "Mesh Id"
-msgstr ""
-
 msgid "Metric"
 msgstr "Metrik"
+
+#, fuzzy
+msgid "Minimum hold time"
+msgstr "Memegang masa minimum"
 
 msgid "Mirror monitor port"
 msgstr ""
@@ -1999,7 +1962,7 @@ msgid "NAT64 Prefix"
 msgstr ""
 
 msgid "NCM"
-msgstr ""
+msgstr "NCM"
 
 msgid "NDP-Proxy"
 msgstr ""
@@ -2119,9 +2082,6 @@ msgid "Notice"
 msgstr ""
 
 msgid "Nslookup"
-msgstr ""
-
-msgid "Number of cached DNS entries (max is 10000, 0 is no caching)"
 msgstr ""
 
 msgid "OK"
@@ -2300,13 +2260,13 @@ msgid "PPPoA Encapsulation"
 msgstr "Pengkapsulan PPPoA"
 
 msgid "PPPoATM"
-msgstr ""
+msgstr "PPPoATM"
 
 msgid "PPPoE"
-msgstr ""
+msgstr "PPPoE"
 
 msgid "PPPoSSH"
-msgstr ""
+msgstr "PPPoSSH"
 
 msgid "PPtP"
 msgstr ""
@@ -2361,6 +2321,9 @@ msgstr ""
 
 msgid "Path to Private Key"
 msgstr "Path ke Kunci Swasta"
+
+msgid "Path to executable which handles the button event"
+msgstr "Path ke eksekusi yang mengendalikan acara butang"
 
 msgid "Path to inner CA-Certificate"
 msgstr ""
@@ -2880,9 +2843,6 @@ msgstr "Saiz"
 msgid "Size (.ipk)"
 msgstr ""
 
-msgid "Size of DNS query cache"
-msgstr ""
-
 msgid "Skip"
 msgstr "Skip"
 
@@ -2924,6 +2884,10 @@ msgstr "Sumber"
 
 msgid "Source routing"
 msgstr ""
+
+#, fuzzy
+msgid "Specifies the button state to handle"
+msgstr "Menentukan state butang untuk melaku"
 
 msgid "Specifies the directory the device is attached to"
 msgstr ""
@@ -3022,9 +2986,6 @@ msgstr ""
 
 msgid ""
 "Switch %q has an unknown topology - the VLAN settings might not be accurate."
-msgstr ""
-
-msgid "Switch Port Mask"
 msgstr ""
 
 msgid "Switch VLAN"
@@ -3257,7 +3218,7 @@ msgstr ""
 
 msgid ""
 "This is the local endpoint address assigned by the tunnel broker, it usually "
-"ends with <code>...:2/64</code>"
+"ends with <code>:2</code>"
 msgstr ""
 
 msgid ""
@@ -3287,6 +3248,9 @@ msgid ""
 msgstr ""
 "Senarai ini memberikan gambaran lebih pada proses sistem yang sedang "
 "berjalan dan statusnya."
+
+msgid "This page allows the configuration of custom button actions"
+msgstr "Laman ini membolehkan konfigurasi butang tindakan peribadi"
 
 msgid "This page gives an overview over currently active network connections."
 msgstr ""
@@ -3471,9 +3435,9 @@ msgstr ""
 
 msgid ""
 "Use the <em>Add</em> Button to add a new lease entry. The <em>MAC-Address</"
-"em> identifies the host, the <em>IPv4-Address</em> specifies the fixed "
-"address to use, and the <em>Hostname</em> is assigned as a symbolic name to "
-"the requesting host. The optional <em>Lease time</em> can be used to set non-"
+"em> indentifies the host, the <em>IPv4-Address</em> specifies to the fixed "
+"address to use and the <em>Hostname</em> is assigned as symbolic name to the "
+"requesting host. The optional <em>Lease time</em> can be used to set non-"
 "standard host-specific lease time, e.g. 12h, 3d or infinite."
 msgstr ""
 
@@ -3589,11 +3553,6 @@ msgstr ""
 msgid "Warning: There are unsaved changes that will get lost on reboot!"
 msgstr ""
 
-msgid ""
-"When using a PSK, the PMK can be generated locally without inter AP "
-"communications"
-msgstr ""
-
 msgid "Whether to create an IPv6 default route over the tunnel"
 msgstr ""
 
@@ -3683,7 +3642,7 @@ msgid "dB"
 msgstr ""
 
 msgid "dBm"
-msgstr ""
+msgstr "dBm"
 
 msgid "disable"
 msgstr "mematikan"
@@ -3765,9 +3724,6 @@ msgstr ""
 msgid "overlay"
 msgstr ""
 
-msgid "random"
-msgstr ""
-
 msgid "relay mode"
 msgstr ""
 
@@ -3813,77 +3769,47 @@ msgstr ""
 msgid "« Back"
 msgstr "« Kembali"
 
-#~ msgid "Action"
-#~ msgstr "Aksi"
+msgid "Leasetime"
+msgstr "Masa penyewaan"
 
-#~ msgid "Buttons"
-#~ msgstr "Butang"
+msgid "AR Support"
+msgstr "AR-Penyokong"
 
-#~ msgid "Handler"
-#~ msgstr "Kawalan"
+msgid "Background Scan"
+msgstr "Latar Belakang Scan"
 
-#, fuzzy
-#~ msgid "Maximum hold time"
-#~ msgstr "Memegang masa maksimum"
+msgid "Compression"
+msgstr "Mampatan"
 
-#, fuzzy
-#~ msgid "Minimum hold time"
-#~ msgstr "Memegang masa minimum"
+msgid "Disable HW-Beacon timer"
+msgstr "Mematikan pemasa HW-Beacon"
 
-#~ msgid "Path to executable which handles the button event"
-#~ msgstr "Path ke eksekusi yang mengendalikan acara butang"
+msgid "Do not send probe responses"
+msgstr "Jangan menghantar jawapan penyelidikan"
 
-#, fuzzy
-#~ msgid "Specifies the button state to handle"
-#~ msgstr "Menentukan state butang untuk melaku"
+msgid "Fast Frames"
+msgstr "Frame Cepat"
 
-#~ msgid "This page allows the configuration of custom button actions"
-#~ msgstr "Laman ini membolehkan konfigurasi butang tindakan peribadi"
+msgid "Maximum Rate"
+msgstr "Rate Maksimum"
 
-#~ msgid "Leasetime"
-#~ msgstr "Masa penyewaan"
+msgid "Minimum Rate"
+msgstr "Rate Minimum"
 
-#~ msgid "automatic"
-#~ msgstr "automatik"
+msgid "Multicast Rate"
+msgstr "Multicast Rate"
 
-#~ msgid "AR Support"
-#~ msgstr "AR-Penyokong"
+msgid "Outdoor Channels"
+msgstr "Saluran Outdoor"
 
-#~ msgid "Background Scan"
-#~ msgstr "Latar Belakang Scan"
+msgid "Regulatory Domain"
+msgstr "Peraturan Domain"
 
-#~ msgid "Compression"
-#~ msgstr "Mampatan"
+msgid "Separate WDS"
+msgstr "Pisahkan WDS"
 
-#~ msgid "Disable HW-Beacon timer"
-#~ msgstr "Mematikan pemasa HW-Beacon"
+msgid "Turbo Mode"
+msgstr "Mod Turbo"
 
-#~ msgid "Do not send probe responses"
-#~ msgstr "Jangan menghantar jawapan penyelidikan"
-
-#~ msgid "Fast Frames"
-#~ msgstr "Frame Cepat"
-
-#~ msgid "Maximum Rate"
-#~ msgstr "Rate Maksimum"
-
-#~ msgid "Minimum Rate"
-#~ msgstr "Rate Minimum"
-
-#~ msgid "Multicast Rate"
-#~ msgstr "Multicast Rate"
-
-#~ msgid "Outdoor Channels"
-#~ msgstr "Saluran Outdoor"
-
-#~ msgid "Regulatory Domain"
-#~ msgstr "Peraturan Domain"
-
-#~ msgid "Separate WDS"
-#~ msgstr "Pisahkan WDS"
-
-#~ msgid "Turbo Mode"
-#~ msgstr "Mod Turbo"
-
-#~ msgid "XR Support"
-#~ msgstr "Sokongan XR"
+msgid "XR Support"
+msgstr "Sokongan XR"

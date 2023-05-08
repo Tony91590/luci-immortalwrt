@@ -507,6 +507,13 @@ static int run_daemon(void)
 				iw_checkif("wlan%d");
 				iw_checkif("ath%d");
 				iw_checkif("wl%d");
+				iw_checkif("host%d");
+				iw_checkif("rausb%d");
+				iw_checkif("rai%d");
+				iw_checkif("ra%d");
+				iw_checkif("apcliusb%d");
+				iw_checkif("apclii%d");
+				iw_checkif("apcli%d");
 			}
 		}
 
@@ -521,7 +528,7 @@ static int run_daemon(void)
 				if (strstr(line, "TIME_WAIT"))
 					continue;
 
-				if ((strstr(line, "src=127.0.0.1 ") && strstr(line, "dst=127.0.0.1 ")) 
+				if ((strstr(line, "src=127.0.0.1 ") && strstr(line, "dst=127.0.0.1 "))
 				|| (strstr(line, "src=::1 ") && strstr(line, "dst=::1 ")))
 					continue;
 

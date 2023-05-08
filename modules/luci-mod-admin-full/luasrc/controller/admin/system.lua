@@ -10,6 +10,7 @@ function index()
 	entry({"admin", "system"}, alias("admin", "system", "system"), _("System"), 30).index = true
 	entry({"admin", "system", "system"}, cbi("admin_system/system"), _("System"), 1)
 	entry({"admin", "system", "clock_status"}, post_on({ set = true }, "action_clock_status"))
+	entry({"admin", "system", "ntp_restart"}, call("action_ntp_restart"), nil).leaf = true
 
 	entry({"admin", "system", "admin"}, cbi("admin_system/admin"), _("Administration"), 2)
 
@@ -19,15 +20,15 @@ function index()
 	end
 
 	entry({"admin", "system", "startup"}, form("admin_system/startup"), _("Startup"), 45)
-	entry({"admin", "system", "crontab"}, form("admin_system/crontab"), _("Scheduled Tasks"), 46)
-
+	--entry({"admin", "system", "crontab"}, form("admin_system/crontab"), _("Scheduled Tasks"), 46)
+	entry({"admin", "system", "crontab"},arcombine(cbi("admin_system/crontab"), cbi("admin_system/crontab-details")),_("Scheduled Tasks"), 46).leaf = true
 	if fs.access("/sbin/block") and fs.access("/etc/config/fstab") then
 		entry({"admin", "system", "fstab"}, cbi("admin_system/fstab"), _("Mount Points"), 50)
 		entry({"admin", "system", "fstab", "mount"}, cbi("admin_system/fstab/mount"), nil).leaf = true
 		entry({"admin", "system", "fstab", "swap"},  cbi("admin_system/fstab/swap"),  nil).leaf = true
 	end
 
-	local nodes, number = fs.glob("/sys/class/leds/*")
+	local nodes, number = nixio.fs.glob("/sys/class/leds/*")
 	if number > 0 then
 		entry({"admin", "system", "leds"}, cbi("admin_system/leds"), _("<abbr title=\"Light Emitting Diode\">LED</abbr> Configuration"), 60)
 	end
@@ -35,6 +36,7 @@ function index()
 	entry({"admin", "system", "flashops"}, call("action_flashops"), _("Backup / Flash Firmware"), 70)
 	entry({"admin", "system", "flashops", "reset"}, post("action_reset"))
 	entry({"admin", "system", "flashops", "backup"}, post("action_backup"))
+	entry({"admin", "system", "flashops", "backupmtdblock"}, post("action_backupmtdblock"))
 	entry({"admin", "system", "flashops", "backupfiles"}, form("admin_system/backupfiles"))
 
 	-- call() instead of post() due to upload handling!
@@ -59,6 +61,14 @@ function action_clock_status()
 
 	luci.http.prepare_content("application/json")
 	luci.http.write_json({ timestring = os.date("%c") })
+end
+
+function action_ntp_restart()
+	if nixio.fs.access("/etc/init.d/sysntpd") then
+		os.execute("/etc/init.d/sysntpd restart")
+	end
+	luci.http.prepare_content("text/plain")
+	luci.http.write("0")
 end
 
 function action_packages()
@@ -311,6 +321,23 @@ function action_backup()
 		})
 
 	luci.http.prepare_content("application/x-targz")
+	luci.ltn12.pump.all(reader, luci.http.write)
+end
+
+function action_backupmtdblock()
+	local http = require "luci.http"
+	local mv = http.formvalue("mtdblockname")
+	local m, s, n = mv:match('^([^%s]+)/([^%s]+)/([^%s]+)')
+
+	local reader = ltn12_popen("cat /dev/mtd%s" % n)
+
+	luci.http.header(
+		'Content-Disposition', 'attachment; filename="backup-%s-%s-%s.bin"' %{
+			luci.sys.hostname(), m,
+			os.date("%Y-%m-%d")
+		})
+
+	luci.http.prepare_content("application/octet-stream")
 	luci.ltn12.pump.all(reader, luci.http.write)
 end
 

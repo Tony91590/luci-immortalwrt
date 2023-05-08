@@ -3,15 +3,16 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-06-10 03:40+0200\n"
-"PO-Revision-Date: 2014-08-07 20:41+0200\n"
-"Last-Translator: Alex <alexhenrie24@gmail.com>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"PO-Revision-Date: 2021-03-08 13:03+0000\n"
+"Last-Translator: BenRoura <benrouravkg@gmail.com>\n"
+"Language-Team: Catalan <https://hosted.weblate.org/projects/openwrt/"
+"luciapplicationsopenvpn/ca/>\n"
 "Language: ca\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Pootle 2.0.6\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.5.1\n"
 
 msgid "%s"
 msgstr "%s"
@@ -127,14 +128,8 @@ msgstr "Directori per fitxers de configuració de client personalitzats"
 msgid "Disable Paging"
 msgstr "Desactiva Paging"
 
-msgid "Disable cipher initialisation vector"
-msgstr "Desactiva xifratge de vector d'inicialització"
-
 msgid "Disable options consistency check"
 msgstr "Desactiva la comprovació de consistència d'opcions"
-
-msgid "Disable replay protection"
-msgstr "Desactiva la protecció de reproducció"
 
 msgid "Do not bind to local address and port"
 msgstr "No vinculis a adreça i port locals"
@@ -159,12 +154,6 @@ msgstr ""
 
 msgid "Don't re-read key on restart"
 msgstr "No rellegeixis la clau al reiniciar"
-
-msgid "Don't require client certificate"
-msgstr "No requereixis el certificat de client"
-
-msgid "Don't use adaptive lzo compression"
-msgstr "No utilitzis compressió adaptativa LZO"
 
 msgid "Don't warn on ifconfig inconsistencies"
 msgstr "No alertis d'inconsistències ifconfig"
@@ -273,9 +262,6 @@ msgstr "Clau privada local"
 
 msgid "Major mode"
 msgstr "Mode major"
-
-msgid "Make tun device IPv6 capable"
-msgstr "Fes que el dispositiu tun sigui apte per IPv6"
 
 msgid "Maximum number of queued TCP output packets"
 msgstr "Número màxim de paquets TCP encuats a la sortida"
@@ -518,12 +504,6 @@ msgstr "Calendari per intercanvi de claus"
 msgid "Type of used device"
 msgstr "Tipus de dispositiu utilitzat"
 
-msgid "Use fast LZO compression"
-msgstr "Utilitza compressió ràpida LZO"
-
-msgid "Use individual addresses rather than /30 subnets"
-msgstr "Utilitza adreces individuals en comptes de subxarxes /30"
-
 msgid "Use protocol"
 msgstr "Utilitza protocol"
 
@@ -557,5 +537,20 @@ msgstr "sí (%i)"
 msgid "« Switch to basic configuration"
 msgstr "Canvia a configuració bàsica"
 
-#~ msgid "Cryptography"
-#~ msgstr "Criptografia"
+msgid "Disable cipher initialisation vector"
+msgstr "Desactiva xifratge de vector d'inicialització"
+
+msgid "Disable replay protection"
+msgstr "Desactiva la protecció de reproducció"
+
+msgid "Don't require client certificate"
+msgstr "No requereixis el certificat de client"
+
+msgid "Make tun device IPv6 capable"
+msgstr "Fes que el dispositiu tun sigui apte per IPv6"
+
+msgid "Use individual addresses rather than /30 subnets"
+msgstr "Utilitza adreces individuals en comptes de subxarxes /30"
+
+msgid "Cryptography"
+msgstr ""

@@ -3,18 +3,16 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-06-10 03:40+0200\n"
-"PO-Revision-Date: 2012-04-03 08:44+0200\n"
-"Last-Translator: juhosg <juhosg@openwrt.org>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"PO-Revision-Date: 2021-02-08 04:46+0000\n"
+"Last-Translator: Zocker1012 <julian.schoemer.1997@gmail.com>\n"
+"Language-Team: English <https://hosted.weblate.org/projects/openwrt/luci/en/"
+">\n"
 "Language: en\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Pootle 2.0.4\n"
-
-msgid "%.1f dB"
-msgstr ""
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.5-dev\n"
 
 msgid "%s is untagged in multiple VLANs!"
 msgstr ""
@@ -135,9 +133,6 @@ msgstr "<abbr title=\"Light Emitting Diode\">LED</abbr> Name"
 msgid "<abbr title=\"Media Access Control\">MAC</abbr>-Address"
 msgstr "<abbr title=\"Media Access Control\">MAC</abbr>-Address"
 
-msgid "<abbr title=\"The DHCP Unique Identifier\">DUID</abbr>"
-msgstr ""
-
 msgid ""
 "<abbr title=\"maximal\">Max.</abbr> <abbr title=\"Dynamic Host Configuration "
 "Protocol\">DHCP</abbr> leases"
@@ -220,6 +215,9 @@ msgstr "Access Concentrator"
 msgid "Access Point"
 msgstr "Access Point"
 
+msgid "Action"
+msgstr "Action"
+
 msgid "Actions"
 msgstr "Actions"
 
@@ -290,9 +288,6 @@ msgstr "Allow <abbr title=\"Secure Shell\">SSH</abbr> password authentication"
 
 msgid "Allow all except listed"
 msgstr "Allow all except listed"
-
-msgid "Allow legacy 802.11b rates"
-msgstr ""
 
 msgid "Allow listed only"
 msgstr "Allow listed only"
@@ -563,6 +558,9 @@ msgid ""
 "preserved in any sysupgrade."
 msgstr ""
 
+msgid "Buttons"
+msgstr "Buttons"
+
 msgid "CA certificate; if empty it will be saved after the first connection."
 msgstr ""
 
@@ -593,7 +591,7 @@ msgstr "Channel"
 msgid "Check"
 msgstr "Check"
 
-msgid "Check filesystems before mount"
+msgid "Check fileystems before mount"
 msgstr ""
 
 msgid "Check this option to delete the existing networks from this radio."
@@ -657,13 +655,6 @@ msgstr "Command"
 
 msgid "Common Configuration"
 msgstr "Common Configuration"
-
-msgid ""
-"Complicates key reinstallation attacks on the client side by disabling "
-"retransmission of EAPOL-Key frames that are used to install keys. This "
-"workaround might cause interoperability issues and reduced robustness of key "
-"negotiation especially in environments with heavy traffic load."
-msgstr ""
 
 msgid "Configuration"
 msgstr "Configuration"
@@ -731,11 +722,6 @@ msgid ""
 msgstr ""
 
 msgid "Custom feeds"
-msgstr ""
-
-msgid ""
-"Custom files (certificates, scripts) may remain on the system. To prevent "
-"this, perform a factory-reset first."
 msgstr ""
 
 msgid ""
@@ -924,7 +910,7 @@ msgstr ""
 "firewalls"
 
 msgid "Do not cache negative replies, e.g. for not existing domains"
-msgstr ""
+msgstr "Do not cache negative replies, e.g. for not existing domains"
 
 msgid "Do not forward requests that cannot be answered by public name servers"
 msgstr ""
@@ -952,9 +938,6 @@ msgid "Download and install package"
 msgstr "Download and install package"
 
 msgid "Download backup"
-msgstr ""
-
-msgid "Downstream SNR offset"
 msgstr ""
 
 msgid "Dropbear Instance"
@@ -1008,11 +991,6 @@ msgstr ""
 msgid "Enable"
 msgstr ""
 
-msgid ""
-"Enable <abbr title=\"Internet Group Management Protocol\">IGMP</abbr> "
-"snooping"
-msgstr ""
-
 msgid "Enable <abbr title=\"Spanning Tree Protocol\">STP</abbr>"
 msgstr "Enable <abbr title=\"Spanning Tree Protocol\">STP</abbr>"
 
@@ -1043,9 +1021,6 @@ msgstr ""
 msgid "Enable WPS pushbutton, requires WPA(2)-PSK"
 msgstr ""
 
-msgid "Enable key reinstallation (KRACK) countermeasures"
-msgstr ""
-
 msgid "Enable learning and aging"
 msgstr ""
 
@@ -1069,9 +1044,6 @@ msgstr "Enable/Disable"
 
 msgid "Enabled"
 msgstr "Enabled"
-
-msgid "Enables IGMP snooping on this bridge"
-msgstr ""
 
 msgid ""
 "Enables fast roaming among access points that belong to the same Mobility "
@@ -1140,15 +1112,6 @@ msgid "External system log server protocol"
 msgstr ""
 
 msgid "Extra SSH command options"
-msgstr ""
-
-msgid "FT over DS"
-msgstr ""
-
-msgid "FT over the Air"
-msgstr ""
-
-msgid "FT protocol"
 msgstr ""
 
 msgid "File"
@@ -1252,9 +1215,6 @@ msgstr ""
 msgid "Forward broadcast traffic"
 msgstr ""
 
-msgid "Forward mesh peer traffic"
-msgstr ""
-
 msgid "Forwarding mode"
 msgstr ""
 
@@ -1272,7 +1232,7 @@ msgstr ""
 
 msgid ""
 "Further information about WireGuard interfaces and peers at <a href=\"http://"
-"wireguard.io\">wireguard.io</a>."
+"wireguard.com\">wireguard.com</a>."
 msgstr ""
 
 msgid "GHz"
@@ -1297,9 +1257,6 @@ msgid "General options for opkg"
 msgstr ""
 
 msgid "Generate Config"
-msgstr ""
-
-msgid "Generate PMK locally"
 msgstr ""
 
 msgid "Generate archive"
@@ -1337,6 +1294,9 @@ msgstr ""
 
 msgid "HT mode (802.11n)"
 msgstr ""
+
+msgid "Handler"
+msgstr "Handler"
 
 msgid "Hang Up"
 msgstr "Hang Up"
@@ -1506,7 +1466,7 @@ msgstr ""
 msgid "Identity"
 msgstr "Identity"
 
-msgid "If checked, 1DES is enabled"
+msgid "If checked, 1DES is enaled"
 msgstr ""
 
 msgid "If checked, encryption is disabled"
@@ -1922,6 +1882,9 @@ msgstr ""
 msgid "Maximum amount of seconds to wait for the modem to become ready"
 msgstr ""
 
+msgid "Maximum hold time"
+msgstr "Maximum hold time"
+
 msgid ""
 "Maximum length of the name is 15 characters including the automatic protocol/"
 "bridge prefix (br-, 6in4-, pppoe- etc.)"
@@ -1939,11 +1902,11 @@ msgstr "Memory"
 msgid "Memory usage (%)"
 msgstr "Memory usage (%)"
 
-msgid "Mesh Id"
-msgstr ""
-
 msgid "Metric"
 msgstr "Metric"
+
+msgid "Minimum hold time"
+msgstr "Minimum hold time"
 
 msgid "Mirror monitor port"
 msgstr ""
@@ -2148,9 +2111,6 @@ msgid "Notice"
 msgstr ""
 
 msgid "Nslookup"
-msgstr ""
-
-msgid "Number of cached DNS entries (max is 10000, 0 is no caching)"
 msgstr ""
 
 msgid "OK"
@@ -2391,6 +2351,9 @@ msgstr ""
 
 msgid "Path to Private Key"
 msgstr "Path to Private Key"
+
+msgid "Path to executable which handles the button event"
+msgstr ""
 
 msgid "Path to inner CA-Certificate"
 msgstr ""
@@ -2689,7 +2652,7 @@ msgid "Required"
 msgstr ""
 
 msgid "Required for certain ISPs, e.g. Charter with DOCSIS 3"
-msgstr ""
+msgstr "Required for certain ISPs, e.g. Charter with DOCSIS 3"
 
 msgid "Required. Base64-encoded private key for this interface."
 msgstr ""
@@ -2911,9 +2874,6 @@ msgstr "Size"
 msgid "Size (.ipk)"
 msgstr ""
 
-msgid "Size of DNS query cache"
-msgstr ""
-
 msgid "Skip"
 msgstr "Skip"
 
@@ -2955,6 +2915,9 @@ msgstr "Source"
 
 msgid "Source routing"
 msgstr ""
+
+msgid "Specifies the button state to handle"
+msgstr "Specifies the button state to handle"
 
 msgid "Specifies the directory the device is attached to"
 msgstr ""
@@ -3055,13 +3018,13 @@ msgid ""
 "Switch %q has an unknown topology - the VLAN settings might not be accurate."
 msgstr ""
 
-msgid "Switch Port Mask"
-msgstr ""
-
 msgid "Switch VLAN"
 msgstr ""
 
 msgid "Switch protocol"
+msgstr ""
+
+msgid "Sync with NTP-Server"
 msgstr ""
 
 msgid "Sync with browser"
@@ -3286,15 +3249,15 @@ msgstr ""
 
 msgid ""
 "This is the local endpoint address assigned by the tunnel broker, it usually "
-"ends with <code>...:2/64</code>"
+"ends with <code>:2</code>"
 msgstr ""
 
 msgid ""
 "This is the only <abbr title=\"Dynamic Host Configuration Protocol\">DHCP</"
 "abbr> in the local network"
 msgstr ""
-"This is the only <abbr title=\"Dynamic Host Configuration Protocol\">DHCP</"
-"abbr> in the local network"
+"This is the only <abbr title=\"Dynamic Host Configuration Protocol Server"
+"\">DHCP-Server</abbr> in the local network"
 
 msgid "This is the plain username for logging into the account"
 msgstr ""
@@ -3316,6 +3279,9 @@ msgid ""
 msgstr ""
 "This list gives an overview over currently running system processes and "
 "their status."
+
+msgid "This page allows the configuration of custom button actions"
+msgstr ""
 
 msgid "This page gives an overview over currently active network connections."
 msgstr "This page gives an overview over currently active network connections."
@@ -3498,9 +3464,9 @@ msgstr ""
 
 msgid ""
 "Use the <em>Add</em> Button to add a new lease entry. The <em>MAC-Address</"
-"em> identifies the host, the <em>IPv4-Address</em> specifies the fixed "
-"address to use, and the <em>Hostname</em> is assigned as a symbolic name to "
-"the requesting host. The optional <em>Lease time</em> can be used to set non-"
+"em> indentifies the host, the <em>IPv4-Address</em> specifies to the fixed "
+"address to use and the <em>Hostname</em> is assigned as symbolic name to the "
+"requesting host. The optional <em>Lease time</em> can be used to set non-"
 "standard host-specific lease time, e.g. 12h, 3d or infinite."
 msgstr ""
 
@@ -3614,11 +3580,6 @@ msgid "Warning"
 msgstr ""
 
 msgid "Warning: There are unsaved changes that will get lost on reboot!"
-msgstr ""
-
-msgid ""
-"When using a PSK, the PMK can be generated locally without inter AP "
-"communications"
 msgstr ""
 
 msgid "Whether to create an IPv6 default route over the tunnel"
@@ -3797,9 +3758,6 @@ msgstr ""
 msgid "overlay"
 msgstr ""
 
-msgid "random"
-msgstr ""
-
 msgid "relay mode"
 msgstr ""
 
@@ -3845,74 +3803,53 @@ msgstr ""
 msgid "« Back"
 msgstr "« Back"
 
-#~ msgid "Action"
-#~ msgstr "Action"
+msgid "Leasetime"
+msgstr "Leasetime"
 
-#~ msgid "Buttons"
-#~ msgstr "Buttons"
+msgid "AR Support"
+msgstr "AR Support"
 
-#~ msgid "Handler"
-#~ msgstr "Handler"
+msgid "Background Scan"
+msgstr "Background Scan"
 
-#~ msgid "Maximum hold time"
-#~ msgstr "Maximum hold time"
+msgid "Compression"
+msgstr "Compression"
 
-#~ msgid "Minimum hold time"
-#~ msgstr "Minimum hold time"
+msgid "Disable HW-Beacon timer"
+msgstr "Disable HW-Beacon timer"
 
-#~ msgid "Specifies the button state to handle"
-#~ msgstr "Specifies the button state to handle"
+msgid "Do not send probe responses"
+msgstr "Do not send probe responses"
 
-#~ msgid "Leasetime"
-#~ msgstr "Leasetime"
+msgid "Fast Frames"
+msgstr "Fast Frames"
 
-#~ msgid "automatic"
-#~ msgstr "automatic"
+msgid "Maximum Rate"
+msgstr "Maximum Rate"
 
-#~ msgid "AR Support"
-#~ msgstr "AR Support"
+msgid "Minimum Rate"
+msgstr "Minimum Rate"
 
-#~ msgid "Background Scan"
-#~ msgstr "Background Scan"
+msgid "Multicast Rate"
+msgstr "Multicast Rate"
 
-#~ msgid "Compression"
-#~ msgstr "Compression"
+msgid "Outdoor Channels"
+msgstr "Outdoor Channels"
 
-#~ msgid "Disable HW-Beacon timer"
-#~ msgstr "Disable HW-Beacon timer"
+msgid "Regulatory Domain"
+msgstr "Regulatory Domain"
 
-#~ msgid "Do not send probe responses"
-#~ msgstr "Do not send probe responses"
+msgid "Separate WDS"
+msgstr "Separate WDS"
 
-#~ msgid "Fast Frames"
-#~ msgstr "Fast Frames"
+msgid "Turbo Mode"
+msgstr "Turbo Mode"
 
-#~ msgid "Maximum Rate"
-#~ msgstr "Maximum Rate"
+msgid "XR Support"
+msgstr "XR Support"
 
-#~ msgid "Minimum Rate"
-#~ msgstr "Minimum Rate"
+msgid "An additional network will be created if you leave this unchecked."
+msgstr "An additional network will be created if you leave this unchecked."
 
-#~ msgid "Multicast Rate"
-#~ msgstr "Multicast Rate"
-
-#~ msgid "Outdoor Channels"
-#~ msgstr "Outdoor Channels"
-
-#~ msgid "Regulatory Domain"
-#~ msgstr "Regulatory Domain"
-
-#~ msgid "Separate WDS"
-#~ msgstr "Separate WDS"
-
-#~ msgid "Turbo Mode"
-#~ msgstr "Turbo Mode"
-
-#~ msgid "XR Support"
-#~ msgstr "XR Support"
-
-#~ msgid "An additional network will be created if you leave this unchecked."
-#~ msgstr "An additional network will be created if you leave this unchecked."
-
-#~ msgid "CPU"
-#~ msgstr "CPU"
+msgid "CPU"
+msgstr "CPU"

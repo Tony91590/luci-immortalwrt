@@ -3,21 +3,19 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-06-10 03:40+0200\n"
-"PO-Revision-Date: 2014-06-06 11:17+0200\n"
-"Last-Translator: Alex <alexhenrie24@gmail.com>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"PO-Revision-Date: 2021-05-18 05:32+0000\n"
+"Last-Translator: ferranb <ferranb@gmail.com>\n"
+"Language-Team: Catalan <https://hosted.weblate.org/projects/openwrt/luci/ca/"
+">\n"
 "Language: ca\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Pootle 2.0.6\n"
-
-msgid "%.1f dB"
-msgstr ""
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.7-dev\n"
 
 msgid "%s is untagged in multiple VLANs!"
-msgstr ""
+msgstr "¡%s està des-etiquetat (untagged) en més d'una VLAN!"
 
 msgid "(%d minute window, %d second interval)"
 msgstr "(finestra de %d minuts, interval de %d segons)"
@@ -44,10 +42,10 @@ msgid "-- match by device --"
 msgstr ""
 
 msgid "-- match by label --"
-msgstr ""
+msgstr "-- Aparellar per etiqueta --"
 
 msgid "-- match by uuid --"
-msgstr ""
+msgstr "-- Aparellar per uuid --"
 
 msgid "1 Minute Load:"
 msgstr "Càrrega d'1 minut:"
@@ -59,7 +57,7 @@ msgid "4-character hexadecimal ID"
 msgstr ""
 
 msgid "464XLAT (CLAT)"
-msgstr ""
+msgstr "464XLAT (CLAT)"
 
 msgid "5 Minute Load:"
 msgstr "Càrrega de 5 minuts:"
@@ -68,7 +66,7 @@ msgid "6-octet identifier as a hex string - no colons"
 msgstr ""
 
 msgid "802.11r Fast Transition"
-msgstr ""
+msgstr "Activar 802.11r (FT)"
 
 msgid "802.11w Association SA Query maximum timeout"
 msgstr ""
@@ -124,7 +122,7 @@ msgid "<abbr title=\"Internet Protocol Version 6\">IPv6</abbr>-Gateway"
 msgstr "Passarel·la <abbr title=\"Internet Protocol Version 6\">IPv6</abbr>"
 
 msgid "<abbr title=\"Internet Protocol Version 6\">IPv6</abbr>-Suffix (hex)"
-msgstr ""
+msgstr "Sufix (hex)<abbr title=\"Internet Protocol Version 6\">IPv6</abbr>-"
 
 msgid "<abbr title=\"Light Emitting Diode\">LED</abbr> Configuration"
 msgstr "Configuració dels <abbr title=\"Light Emitting Diode\">LED</abbr>s"
@@ -134,9 +132,6 @@ msgstr "Nom <abbr title=\"Light Emitting Diode\">LED</abbr>"
 
 msgid "<abbr title=\"Media Access Control\">MAC</abbr>-Address"
 msgstr "Adreça <abbr title=\"Media Access Control\">MAC</abbr>"
-
-msgid "<abbr title=\"The DHCP Unique Identifier\">DUID</abbr>"
-msgstr ""
 
 msgid ""
 "<abbr title=\"maximal\">Max.</abbr> <abbr title=\"Dynamic Host Configuration "
@@ -166,19 +161,19 @@ msgstr ""
 "buit abans d'editar-lo."
 
 msgid "A43C + J43 + A43"
-msgstr ""
+msgstr "A43C + J43 + A43"
 
 msgid "A43C + J43 + A43 + V43"
-msgstr ""
+msgstr "A43C + J43 + A43 + V43"
 
 msgid "ADSL"
-msgstr ""
+msgstr "ADSL"
 
 msgid "AICCU (SIXXS)"
 msgstr ""
 
 msgid "ANSI T1.413"
-msgstr ""
+msgstr "ANSI T1.413"
 
 msgid "APN"
 msgstr "APN"
@@ -221,6 +216,9 @@ msgstr "Concentrador d'accés"
 
 msgid "Access Point"
 msgstr "Punt d'accés"
+
+msgid "Action"
+msgstr "Acció"
 
 msgid "Actions"
 msgstr "Accions"
@@ -272,7 +270,7 @@ msgid "Administration"
 msgstr "Administració"
 
 msgid "Advanced Settings"
-msgstr "Paràmetres avançats"
+msgstr "Configuració avançada"
 
 msgid "Aggregate Transmit Power(ACTATP)"
 msgstr ""
@@ -295,9 +293,6 @@ msgstr ""
 
 msgid "Allow all except listed"
 msgstr "Permet-les totes menys les llistades"
-
-msgid "Allow legacy 802.11b rates"
-msgstr ""
 
 msgid "Allow listed only"
 msgstr "Permet només les llistades"
@@ -332,7 +327,7 @@ msgid "Always announce default router"
 msgstr ""
 
 msgid "Annex"
-msgstr ""
+msgstr "Annex"
 
 msgid "Annex A + L + M (all)"
 msgstr ""
@@ -445,7 +440,7 @@ msgid "Auto Refresh"
 msgstr "Refresc automàtic"
 
 msgid "Automatic"
-msgstr ""
+msgstr "Automàtic"
 
 msgid "Automatic Homenet (HNCP)"
 msgstr ""
@@ -475,13 +470,13 @@ msgid "Average:"
 msgstr "Mitjana:"
 
 msgid "B43 + B43C"
-msgstr ""
+msgstr "B43 + B43C"
 
 msgid "B43 + B43C + V43"
-msgstr ""
+msgstr "B43 + B43C + V43"
 
 msgid "BR / DMR / AFTR"
-msgstr ""
+msgstr "BR / DMR / AFTR"
 
 msgid "BSSID"
 msgstr "BSSID"
@@ -506,7 +501,7 @@ msgid "Backup / Flash Firmware"
 msgstr "Còpia de seguretat i microprogramari"
 
 msgid "Backup / Restore"
-msgstr "Còpia de seguretat i restauració de la configuració"
+msgstr "Còpia de seguretat / Restauració"
 
 msgid "Backup file list"
 msgstr "Llista de còpies de seguretat"
@@ -572,6 +567,9 @@ msgstr ""
 "Repositoris específics de la distribució/compilació. Aquest fitxer NO es "
 "preservarà durant les actualitzacions del microprogramari del sistema."
 
+msgid "Buttons"
+msgstr "Botons"
+
 msgid "CA certificate; if empty it will be saved after the first connection."
 msgstr ""
 
@@ -579,7 +577,7 @@ msgid "CPU usage (%)"
 msgstr "Ús de CPU (%)"
 
 msgid "Cancel"
-msgstr "Cancel·la"
+msgstr "Cancel•lar"
 
 msgid "Category"
 msgstr ""
@@ -602,7 +600,7 @@ msgstr "Canal"
 msgid "Check"
 msgstr "Comprovació"
 
-msgid "Check filesystems before mount"
+msgid "Check fileystems before mount"
 msgstr ""
 
 msgid "Check this option to delete the existing networks from this radio."
@@ -640,10 +638,6 @@ msgid ""
 "configuration files. To reset the firmware to its initial state, click "
 "\"Perform reset\" (only possible with squashfs images)."
 msgstr ""
-"Fes clic a \"Genera l'arxiu\" per obtenir un fitxer .tar.gz amb els fitxers "
-"de configuració actuals. Per restablir el microprogramari al seu estat "
-"inicial, fes clic a \"Restableix la configuració\" (només funciona amb "
-"imatges squashfs)."
 
 msgid "Client"
 msgstr "Client"
@@ -660,20 +654,13 @@ msgid "Close list..."
 msgstr "Tanca la llista..."
 
 msgid "Collecting data..."
-msgstr "Aplegant dades..."
+msgstr "S’estan recollint dades…"
 
 msgid "Command"
 msgstr "Ordre"
 
 msgid "Common Configuration"
 msgstr "Configuració comuna"
-
-msgid ""
-"Complicates key reinstallation attacks on the client side by disabling "
-"retransmission of EAPOL-Key frames that are used to install keys. This "
-"workaround might cause interoperability issues and reduced robustness of key "
-"negotiation especially in environments with heavy traffic load."
-msgstr ""
 
 msgid "Configuration"
 msgstr "Configuració"
@@ -744,11 +731,6 @@ msgid "Custom feeds"
 msgstr ""
 
 msgid ""
-"Custom files (certificates, scripts) may remain on the system. To prevent "
-"this, perform a factory-reset first."
-msgstr ""
-
-msgid ""
 "Customizes the behaviour of the device <abbr title=\"Light Emitting Diode"
 "\">LED</abbr>s if possible."
 msgstr ""
@@ -804,7 +786,7 @@ msgid "DS-Lite AFTR address"
 msgstr ""
 
 msgid "DSL"
-msgstr ""
+msgstr "DSL"
 
 msgid "DSL Status"
 msgstr ""
@@ -963,9 +945,6 @@ msgstr "Descarrega i instal·la el paquet"
 msgid "Download backup"
 msgstr "Descarrega còpia de seguretat"
 
-msgid "Downstream SNR offset"
-msgstr ""
-
 msgid "Dropbear Instance"
 msgstr "Instància de Dropbear"
 
@@ -1015,12 +994,7 @@ msgid "Emergency"
 msgstr "Emergència"
 
 msgid "Enable"
-msgstr "Habilita"
-
-msgid ""
-"Enable <abbr title=\"Internet Group Management Protocol\">IGMP</abbr> "
-"snooping"
-msgstr ""
+msgstr "Activa"
 
 msgid "Enable <abbr title=\"Spanning Tree Protocol\">STP</abbr>"
 msgstr "Habilita l'<abbr title=\"Spanning Tree Protocol\">STP</abbr>"
@@ -1052,9 +1026,6 @@ msgstr "Habilita la funcionalitat VLAN"
 msgid "Enable WPS pushbutton, requires WPA(2)-PSK"
 msgstr ""
 
-msgid "Enable key reinstallation (KRACK) countermeasures"
-msgstr ""
-
 msgid "Enable learning and aging"
 msgstr "Habilita l'aprenentatge i l'envelliment"
 
@@ -1077,10 +1048,7 @@ msgid "Enable/Disable"
 msgstr "Activa/Desactiva"
 
 msgid "Enabled"
-msgstr "Habilitat"
-
-msgid "Enables IGMP snooping on this bridge"
-msgstr ""
+msgstr "Activat"
 
 msgid ""
 "Enables fast roaming among access points that belong to the same Mobility "
@@ -1094,7 +1062,7 @@ msgid "Encapsulation mode"
 msgstr "Mode d'encapsulació"
 
 msgid "Encryption"
-msgstr "Encriptació"
+msgstr "Xifratge"
 
 msgid "Endpoint Host"
 msgstr ""
@@ -1103,7 +1071,7 @@ msgid "Endpoint Port"
 msgstr ""
 
 msgid "Erasing..."
-msgstr "Esborrant..."
+msgstr "S’està esborrant…"
 
 msgid "Error"
 msgstr "Error"
@@ -1115,7 +1083,7 @@ msgid "Ethernet Adapter"
 msgstr "Adaptador Ethernet"
 
 msgid "Ethernet Switch"
-msgstr "Switch Ethernet"
+msgstr "Commutador Ethernet"
 
 msgid "Exclude interfaces"
 msgstr ""
@@ -1149,15 +1117,6 @@ msgid "External system log server protocol"
 msgstr "Protocol del servidor de registre del sistema extern"
 
 msgid "Extra SSH command options"
-msgstr ""
-
-msgid "FT over DS"
-msgstr ""
-
-msgid "FT over the Air"
-msgstr ""
-
-msgid "FT protocol"
 msgstr ""
 
 msgid "File"
@@ -1261,9 +1220,6 @@ msgstr ""
 msgid "Forward broadcast traffic"
 msgstr "Reenvia el trànsit difós"
 
-msgid "Forward mesh peer traffic"
-msgstr ""
-
 msgid "Forwarding mode"
 msgstr "Mode de reenviament"
 
@@ -1281,7 +1237,7 @@ msgstr "Espai lliure"
 
 msgid ""
 "Further information about WireGuard interfaces and peers at <a href=\"http://"
-"wireguard.io\">wireguard.io</a>."
+"wireguard.com\">wireguard.com</a>."
 msgstr ""
 
 msgid "GHz"
@@ -1297,7 +1253,7 @@ msgid "Gateway ports"
 msgstr "Ports de passarel·la"
 
 msgid "General Settings"
-msgstr "Ajusts generals"
+msgstr "Paràmetres generals"
 
 msgid "General Setup"
 msgstr ""
@@ -1306,9 +1262,6 @@ msgid "General options for opkg"
 msgstr "Opcions generals d'opkg"
 
 msgid "Generate Config"
-msgstr ""
-
-msgid "Generate PMK locally"
 msgstr ""
 
 msgid "Generate archive"
@@ -1323,7 +1276,7 @@ msgstr ""
 "contrasenya no s'ha canviat!"
 
 msgid "Global Settings"
-msgstr ""
+msgstr "Configuració global"
 
 msgid "Global network options"
 msgstr ""
@@ -1347,6 +1300,9 @@ msgid "HE.net username"
 msgstr ""
 
 msgid "HT mode (802.11n)"
+msgstr ""
+
+msgid "Handler"
 msgstr ""
 
 msgid "Hang Up"
@@ -1380,7 +1336,7 @@ msgstr ""
 "No mostris l'<abbr title=\"Extended Service Set Identifier\">ESSID</abbr>"
 
 msgid "Host"
-msgstr "Nom de màquina"
+msgstr "Amfitrió"
 
 msgid "Host entries"
 msgstr "Entrades de noms de màquina"
@@ -1392,7 +1348,7 @@ msgid "Host-<abbr title=\"Internet Protocol Address\">IP</abbr> or Network"
 msgstr "Xarxa o adreça <abbr title=\"Internet Protocol Address\">IP</abbr>"
 
 msgid "Hostname"
-msgstr "Nom de màquina"
+msgstr "Nom de l’amfitrió"
 
 msgid "Hostname to send when requesting DHCP"
 msgstr ""
@@ -1520,7 +1476,7 @@ msgstr "IPv6-sobre-IPv4 (6to4)"
 msgid "Identity"
 msgstr "Identitat"
 
-msgid "If checked, 1DES is enabled"
+msgid "If checked, 1DES is enaled"
 msgstr ""
 
 msgid "If checked, encryption is disabled"
@@ -1823,7 +1779,7 @@ msgid "Load Average"
 msgstr "Càrrega mitjana"
 
 msgid "Loading"
-msgstr "Carregant"
+msgstr "S’està carregant"
 
 msgid "Local IP address to assign"
 msgstr ""
@@ -1908,7 +1864,7 @@ msgid "MB/s"
 msgstr "MB/s"
 
 msgid "MD5"
-msgstr ""
+msgstr "MD5"
 
 msgid "MHz"
 msgstr "MHz"
@@ -1939,6 +1895,9 @@ msgstr ""
 msgid "Maximum amount of seconds to wait for the modem to become ready"
 msgstr ""
 
+msgid "Maximum hold time"
+msgstr ""
+
 msgid ""
 "Maximum length of the name is 15 characters including the automatic protocol/"
 "bridge prefix (br-, 6in4-, pppoe- etc.)"
@@ -1956,11 +1915,11 @@ msgstr "Memòria"
 msgid "Memory usage (%)"
 msgstr "Ús de Memòria (%)"
 
-msgid "Mesh Id"
-msgstr ""
-
 msgid "Metric"
 msgstr "Mètrica"
+
+msgid "Minimum hold time"
+msgstr ""
 
 msgid "Mirror monitor port"
 msgstr ""
@@ -2027,10 +1986,10 @@ msgid "Mounted file systems"
 msgstr "Sistemes de fitxers muntats"
 
 msgid "Move down"
-msgstr "Baixa"
+msgstr "Mou cap avall"
 
 msgid "Move up"
-msgstr "Puja"
+msgstr "Mou cap amunt"
 
 msgid "Multicast address"
 msgstr "Adreça de difusió selectiva"
@@ -2045,7 +2004,7 @@ msgid "NAT64 Prefix"
 msgstr ""
 
 msgid "NCM"
-msgstr ""
+msgstr "NCM"
 
 msgid "NDP-Proxy"
 msgstr ""
@@ -2166,9 +2125,6 @@ msgstr "Avís"
 
 msgid "Nslookup"
 msgstr "Nslookup"
-
-msgid "Number of cached DNS entries (max is 10000, 0 is no caching)"
-msgstr ""
 
 msgid "OK"
 msgstr "D'acord"
@@ -2353,7 +2309,7 @@ msgid "PPPoE"
 msgstr "PPPoE"
 
 msgid "PPPoSSH"
-msgstr ""
+msgstr "PPPoSSH"
 
 msgid "PPtP"
 msgstr "PPtP"
@@ -2401,13 +2357,16 @@ msgid "Password2"
 msgstr ""
 
 msgid "Path to CA-Certificate"
-msgstr "Ruta als Certificats CA"
+msgstr "Camí cap al certificat CA"
 
 msgid "Path to Client-Certificate"
-msgstr ""
+msgstr "Camí cap al certificat de client"
 
 msgid "Path to Private Key"
-msgstr "Ruta a la clau privada"
+msgstr "Camí cap a la clau privada"
+
+msgid "Path to executable which handles the button event"
+msgstr ""
 
 msgid "Path to inner CA-Certificate"
 msgstr ""
@@ -2746,7 +2705,7 @@ msgid "Resolve file"
 msgstr ""
 
 msgid "Restart"
-msgstr "Reinicia"
+msgstr "Reiniciar"
 
 msgid "Restart Firewall"
 msgstr "Reinicia el tallafocs"
@@ -2833,7 +2792,7 @@ msgid "SSID"
 msgstr "SSID"
 
 msgid "Save"
-msgstr "Desa"
+msgstr "Desar"
 
 msgid "Save & Apply"
 msgstr "Desa i aplica"
@@ -2879,7 +2838,7 @@ msgid "Server username"
 msgstr ""
 
 msgid "Service Name"
-msgstr "Nom de servei"
+msgstr "Nom del servei"
 
 msgid "Service Type"
 msgstr "Tipus de servei"
@@ -2929,9 +2888,6 @@ msgstr "Mida"
 msgid "Size (.ipk)"
 msgstr "Mida (.ipk)"
 
-msgid "Size of DNS query cache"
-msgstr ""
-
 msgid "Skip"
 msgstr "Salta"
 
@@ -2972,6 +2928,9 @@ msgid "Source"
 msgstr "Origen"
 
 msgid "Source routing"
+msgstr ""
+
+msgid "Specifies the button state to handle"
 msgstr ""
 
 msgid "Specifies the directory the device is attached to"
@@ -3071,9 +3030,6 @@ msgstr "Commutador %q (%s)"
 
 msgid ""
 "Switch %q has an unknown topology - the VLAN settings might not be accurate."
-msgstr ""
-
-msgid "Switch Port Mask"
 msgstr ""
 
 msgid "Switch VLAN"
@@ -3291,8 +3247,6 @@ msgid ""
 "There is no password set on this router. Please configure a root password to "
 "protect the web interface and enable SSH."
 msgstr ""
-"No s'ha establert cap contrasenya en aquest encaminador. Si us plau, "
-"configura una contrasenya per protegir la interfície web i l'accés SSH."
 
 msgid "This IPv4 address of the relay"
 msgstr ""
@@ -3324,7 +3278,7 @@ msgstr ""
 
 msgid ""
 "This is the local endpoint address assigned by the tunnel broker, it usually "
-"ends with <code>...:2/64</code>"
+"ends with <code>:2</code>"
 msgstr ""
 
 msgid ""
@@ -3357,6 +3311,9 @@ msgstr ""
 "Aquesta llista mostra una vista general sobre els processos corrent al "
 "sistema actualment i el seu estat."
 
+msgid "This page allows the configuration of custom button actions"
+msgstr ""
+
 msgid "This page gives an overview over currently active network connections."
 msgstr ""
 "Aquesta pàgina ofereix una vista general de les connexions de xarxa actives "
@@ -3378,8 +3335,6 @@ msgid ""
 "To restore configuration files, you can upload a previously generated backup "
 "archive here."
 msgstr ""
-"Per restaurar els fitxers de configuració, pots pujar una còpia de seguretat "
-"generada anteriorment aquí."
 
 msgid "Tone"
 msgstr ""
@@ -3545,9 +3500,9 @@ msgstr ""
 
 msgid ""
 "Use the <em>Add</em> Button to add a new lease entry. The <em>MAC-Address</"
-"em> identifies the host, the <em>IPv4-Address</em> specifies the fixed "
-"address to use, and the <em>Hostname</em> is assigned as a symbolic name to "
-"the requesting host. The optional <em>Lease time</em> can be used to set non-"
+"em> indentifies the host, the <em>IPv4-Address</em> specifies to the fixed "
+"address to use and the <em>Hostname</em> is assigned as symbolic name to the "
+"requesting host. The optional <em>Lease time</em> can be used to set non-"
 "standard host-specific lease time, e.g. 12h, 3d or infinite."
 msgstr ""
 
@@ -3652,7 +3607,7 @@ msgid "Waiting for changes to be applied..."
 msgstr "Esperant que s'apliquin els canvis..."
 
 msgid "Waiting for command to complete..."
-msgstr "Esperant que s'acabi l'ordre..."
+msgstr "S’està esperant que l’ordre s’acabi…"
 
 msgid "Waiting for device..."
 msgstr "Esperant el dispositiu..."
@@ -3661,11 +3616,6 @@ msgid "Warning"
 msgstr "Advertència"
 
 msgid "Warning: There are unsaved changes that will get lost on reboot!"
-msgstr ""
-
-msgid ""
-"When using a PSK, the PMK can be generated locally without inter AP "
-"communications"
 msgstr ""
 
 msgid "Whether to create an IPv6 default route over the tunnel"
@@ -3696,7 +3646,7 @@ msgid "Wireless Security"
 msgstr "Seguretat sense fils"
 
 msgid "Wireless is disabled or not associated"
-msgstr "El dispositiu sense fils està inhabilitat o sense associar"
+msgstr "El sense fil està inhabilitat o sense associar"
 
 msgid "Wireless is restarting..."
 msgstr "El dispositiu sense fils està reiniciant..."
@@ -3847,9 +3797,6 @@ msgstr "obert"
 msgid "overlay"
 msgstr ""
 
-msgid "random"
-msgstr ""
-
 msgid "relay mode"
 msgstr ""
 
@@ -3895,78 +3842,68 @@ msgstr "sí"
 msgid "« Back"
 msgstr "« Enrere"
 
-#~ msgid "Action"
-#~ msgstr "Acció"
+msgid "Leasetime"
+msgstr "Duració d'arrendament"
 
-#~ msgid "Buttons"
-#~ msgstr "Botons"
+msgid "AR Support"
+msgstr "Suport AR"
 
-#~ msgid "Leasetime"
-#~ msgstr "Duració d'arrendament"
+msgid "Atheros 802.11%s Wireless Controller"
+msgstr "Controlador sense fils d'Atheros 802.11%s"
 
-#, fuzzy
-#~ msgid "automatic"
-#~ msgstr "estàtic"
+msgid "Background Scan"
+msgstr "Escaneig de fons"
 
-#~ msgid "AR Support"
-#~ msgstr "Suport AR"
+msgid "Compression"
+msgstr "Compressió"
 
-#~ msgid "Atheros 802.11%s Wireless Controller"
-#~ msgstr "Controlador sense fils d'Atheros 802.11%s"
+msgid "Disable HW-Beacon timer"
+msgstr "Inhabilita el temporitzador HW-Beacon"
 
-#~ msgid "Background Scan"
-#~ msgstr "Escaneig de fons"
+msgid "Do not send probe responses"
+msgstr "No enviïs les respostes de prova"
 
-#~ msgid "Compression"
-#~ msgstr "Compressió"
+msgid "Fast Frames"
+msgstr "Fast Frames"
 
-#~ msgid "Disable HW-Beacon timer"
-#~ msgstr "Inhabilita el temporitzador HW-Beacon"
+msgid "Maximum Rate"
+msgstr "Velocitat màxima"
 
-#~ msgid "Do not send probe responses"
-#~ msgstr "No enviïs les respostes de prova"
+msgid "Minimum Rate"
+msgstr "Velocitat mínima"
 
-#~ msgid "Fast Frames"
-#~ msgstr "Fast Frames"
+msgid "Multicast Rate"
+msgstr "Velocitat de difusió selectiva"
 
-#~ msgid "Maximum Rate"
-#~ msgstr "Velocitat màxima"
+msgid "Outdoor Channels"
+msgstr "Canals d'exteriors"
 
-#~ msgid "Minimum Rate"
-#~ msgstr "Velocitat mínima"
+msgid "Regulatory Domain"
+msgstr "Domini regulatori"
 
-#~ msgid "Multicast Rate"
-#~ msgstr "Velocitat de difusió selectiva"
+msgid "Separate WDS"
+msgstr "WDS separat"
 
-#~ msgid "Outdoor Channels"
-#~ msgstr "Canals d'exteriors"
+msgid "Static WDS"
+msgstr "WDS estàtic"
 
-#~ msgid "Regulatory Domain"
-#~ msgstr "Domini regulatori"
+msgid "Turbo Mode"
+msgstr "Mode Turbo"
 
-#~ msgid "Separate WDS"
-#~ msgstr "WDS separat"
+msgid "XR Support"
+msgstr "Suport XR"
 
-#~ msgid "Static WDS"
-#~ msgstr "WDS estàtic"
+msgid "An additional network will be created if you leave this unchecked."
+msgstr "Es crearà una xarxa addicional si deixes això sense marcar."
 
-#~ msgid "Turbo Mode"
-#~ msgstr "Mode Turbo"
+msgid "Join Network: Settings"
+msgstr "Unir-se a la xarxa: Ajusts"
 
-#~ msgid "XR Support"
-#~ msgstr "Suport XR"
+msgid "CPU"
+msgstr "CPU"
 
-#~ msgid "An additional network will be created if you leave this unchecked."
-#~ msgstr "Es crearà una xarxa addicional si deixes això sense marcar."
+msgid "Port %d"
+msgstr "Port %d"
 
-#~ msgid "Join Network: Settings"
-#~ msgstr "Unir-se a la xarxa: Ajusts"
-
-#~ msgid "CPU"
-#~ msgstr "CPU"
-
-#~ msgid "Port %d"
-#~ msgstr "Port %d"
-
-#~ msgid "VLAN Interface"
-#~ msgstr "Interfície VLAN"
+msgid "VLAN Interface"
+msgstr "Interfície VLAN"

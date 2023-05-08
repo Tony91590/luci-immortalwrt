@@ -7,9 +7,11 @@
 LUCI_NAME?=$(notdir ${CURDIR})
 LUCI_TYPE?=$(word 2,$(subst -, ,$(LUCI_NAME)))
 LUCI_BASENAME?=$(patsubst luci-$(LUCI_TYPE)-%,%,$(LUCI_NAME))
-LUCI_LANGUAGES:=$(sort $(filter-out templates,$(notdir $(wildcard ${CURDIR}/po/*))))
+LUCI_LANGUAGES:=$(filter-out templates,$(notdir $(wildcard ${CURDIR}/po/*)))
 LUCI_DEFAULTS:=$(notdir $(wildcard ${CURDIR}/root/etc/uci-defaults/*))
 LUCI_PKGARCH?=$(if $(realpath src/Makefile),,all)
+LUCI_SECTION?=luci
+LUCI_CATEGORY?=LuCI
 
 # Language code titles
 LUCI_LANG.ca=Català (Catalan)
@@ -36,8 +38,8 @@ LUCI_LANG.sv=Svenska (Swedish)
 LUCI_LANG.tr=Türkçe (Turkish)
 LUCI_LANG.uk=украї́нська (Ukrainian)
 LUCI_LANG.vi=Tiếng Việt (Vietnamese)
-LUCI_LANG.zh-cn=中文 (Chinese)
-LUCI_LANG.zh-tw=臺灣華語 (Taiwanese)
+LUCI_LANG.zh-cn=简体中文 (Simplified Chinese)
+LUCI_LANG.zh-tw=繁体中文 (Traditional Chinese)
 
 # Submenu titles
 LUCI_MENU.col=1. Collections
@@ -90,13 +92,24 @@ PKG_BUILD_DIR:=$(BUILD_DIR)/$(PKG_NAME)
 
 include $(INCLUDE_DIR)/package.mk
 
+# LUCI_SUBMENU: the submenu-item below the LuCI top-level menu inside OpoenWrt menuconfig
+#               usually one of the LUCI_MENU.* definitions
+# LUCI_SUBMENU_DEFAULT: the regular SUBMENU defined by LUCI_TYPE or derrived from the packagename
+# LUCI_SUBMENU_FORCED: manually forced value SUBMENU to set to by explicit definiton
+#                      can be any string, "none" disables the creation of a submenu 
+#                      most usefull in combination with LUCI_CATEGORY, to make the package appear
+#                      anywhere in the menu structure
+LUCI_SUBMENU_DEFAULT=$(if $(LUCI_MENU.$(LUCI_TYPE)),$(LUCI_MENU.$(LUCI_TYPE)),$(LUCI_MENU.app))
+LUCI_SUBMENU=$(if $(LUCI_SUBMENU_FORCED),$(LUCI_SUBMENU_FORCED),$(LUCI_SUBMENU_DEFAULT))
+
 define Package/$(PKG_NAME)
-  SECTION:=luci
-  CATEGORY:=LuCI
-  SUBMENU:=$(if $(LUCI_MENU.$(LUCI_TYPE)),$(LUCI_MENU.$(LUCI_TYPE)),$(LUCI_MENU.app))
+  SECTION:=$(LUCI_SECTION)
+  CATEGORY:=$(LUCI_CATEGORY)
+ifneq ($(LUCI_SUBMENU),none)
+  SUBMENU:=$(LUCI_SUBMENU)
+endif
   TITLE:=$(if $(LUCI_TITLE),$(LUCI_TITLE),LuCI $(LUCI_NAME) $(LUCI_TYPE))
   DEPENDS:=$(LUCI_DEPENDS)
-  $(if $(LUCI_EXTRA_DEPENDS),EXTRA_DEPENDS:=$(LUCI_EXTRA_DEPENDS))
   $(if $(LUCI_PKGARCH),PKGARCH:=$(LUCI_PKGARCH))
 endef
 
@@ -116,8 +129,8 @@ ifeq ($(PKG_NAME),luci-base)
    menu "Translations"$(foreach lang,$(LUCI_LANGUAGES),
 
      config LUCI_LANG_$(lang)
-	   tristate "$(shell echo '$(LUCI_LANG.$(lang))' | sed -e 's/^.* (\(.*\))$$/\1/') ($(lang))")
-
+	   tristate "$(shell echo '$(LUCI_LANG.$(lang))' | sed -e 's/^.* (\(.*\))$$/\1/') ($(lang))"
+	   default $(shell if [ '$(lang)' == 'zh-cn' ]; then echo y; else echo n; fi))
    endmenu
  endef
 endif
@@ -192,6 +205,8 @@ ifneq ($(LUCI_DEFAULTS),)
 define Package/$(PKG_NAME)/postinst
 [ -n "$${IPKG_INSTROOT}" ] || {$(foreach script,$(LUCI_DEFAULTS),
 	(. /etc/uci-defaults/$(script)) && rm -f /etc/uci-defaults/$(script))
+	rm -f /tmp/luci-indexcache
+	rm -rf /tmp/luci-modulecache/
 	exit 0
 }
 endef

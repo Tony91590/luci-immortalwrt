@@ -177,7 +177,7 @@ else
 
 	function ch.cfgvalue(self, section)
 		return {
-			m:get(section, "hwmode") or "",
+			m:get(section, "band") or "",
 			m:get(section, "channel") or "auto",
 			m:get(section, "htmode") or ""
 		}
@@ -185,17 +185,22 @@ else
 
 	function ch.formvalue(self, section)
 		return {
-			m:formvalue(self:cbid(section) .. ".band") or (hw_modes.g and "11g" or "11a"),
+			m:formvalue(self:cbid(section) .. ".band") or ("2g" or "5g"),
 			m:formvalue(self:cbid(section) .. ".channel") or "auto",
 			m:formvalue(self:cbid(section) .. ".htmode") or ""
 		}
 	end
 
 	function ch.write(self, section, value)
-		m:set(section, "hwmode", value[1])
+		m:set(section, "band", value[1])
 		m:set(section, "channel", value[2])
 		m:set(section, "htmode", value[3])
 	end
+
+	noscan = s:taboption("general", Flag, "noscan", translate("Force 40MHz mode"),
+		translate("Always use 40MHz channels even if the secondary channel overlaps. " ..
+			"Using this option does not comply with IEEE 802.11n-2009!"))
+	noscan.default = noscan.disabled
 end
 
 ------------------- MAC80211 Device ------------------
@@ -228,9 +233,32 @@ if hwtype == "mac80211" then
 		s:taboption("advanced", Value, "country", translate("Country Code"), translate("Use ISO/IEC 3166 alpha2 country codes."))
 	end
 
-	legacyrates = s:taboption("advanced", Flag, "legacy_rates", translate("Allow legacy 802.11b rates"))
+	celldensity = s:taboption("advanced", ListValue, "cell_density", translate("Coverage cell density"),
+		translate("Configures data rates based on the coverage cell density. Normal configures basic rates to 6, 12, 24 Mbps if " ..
+			"legacy 802.11b rates are not used else to 5.5, 11 Mbps. High configures basic rates to 12, 24 Mbps if legacy 802.11b " ..
+			"rates are not used else to the 11 Mbps rate. Very High configures 24 Mbps as the basic rate. Supported rates lower than " ..
+			"the minimum basic rate are not offered."))
+	celldensity:value("0", translate("Disabled"))
+	celldensity:value("1", translate("Normal"))
+	celldensity:value("2", translate("High"))
+	celldensity:value("3", translate("Very High"))
+
+	legacyrates = s:taboption("advanced", Flag, "legacy_rates", translate("Allow legacy 802.11b rates"),
+		translate("Legacy or badly behaving devices may require legacy 802.11b rates to interoperate. " ..
+			"Airtime efficiency may be significantly reduced where these are used. It is recommended " ..
+			"to not allow 802.11b rates where possible."))
 	legacyrates.rmempty = false
-	legacyrates.default = "1"
+	legacyrates.default = "0"
+
+	if hw_modes.g then
+		vendor_vht = s:taboption("advanced", Flag, "vendor_vht", translate("Enable 256QAM modulation"),
+			translate("802.11n 2.4Ghz only, may not supported by some hardware!"))
+		vendor_vht.default = vendor_vht.disabled
+	end
+
+	mubeamformer = s:taboption("advanced", Flag, "mu_beamformer", translate("MU-MIMO"))
+	mubeamformer.rmempty = false
+	mubeamformer.default = "0"
 
 	s:taboption("advanced", Value, "distance", translate("Distance Optimization"),
 		translate("Distance to farthest network member in meters."))
@@ -249,6 +277,11 @@ if hwtype == "mac80211" then
 
 	s:taboption("advanced", Value, "frag", translate("Fragmentation Threshold"))
 	s:taboption("advanced", Value, "rts", translate("RTS/CTS Threshold"))
+
+	beacon_int = s:taboption("advanced", Value, "beacon_int", translate("Beacon Interval"))
+	beacon_int.optional = true
+	beacon_int.placeholder = 100
+	beacon_int.datatype = "range(15, 65535)"
 end
 
 
@@ -488,6 +521,18 @@ if hwtype == "mac80211" then
 
 	ifname = s:taboption("advanced", Value, "ifname", translate("Interface name"), translate("Override default interface name"))
 	ifname.optional = true
+
+	short_preamble = s:taboption("advanced", Flag, "short_preamble", translate("Short Preamble"))
+	short_preamble.default = short_preamble.enabled
+
+	dtim_period = s:taboption("advanced", Value, "dtim_period", translate("DTIM Interval"),
+		translate("Delivery Traffic Indication Message Interval"))
+	dtim_period.optional = true
+	dtim_period.placeholder = 2
+
+	disassoc_low_ack = s:taboption("advanced", Flag, "disassoc_low_ack", translate("Disassociate On Low Acknowledgement"),
+		translate("Allow AP mode to disconnect STAs based on low ACK condition"))
+	disassoc_low_ack.default = disassoc_low_ack.enabled
 end
 
 
@@ -558,6 +603,8 @@ encr:depends({mode="mesh"})
 cipher = s:taboption("encryption", ListValue, "cipher", translate("Cipher"))
 cipher:depends({encryption="wpa"})
 cipher:depends({encryption="wpa2"})
+cipher:depends({encryption="wpa3"})
+cipher:depends({encryption="wpa3-mixed"})
 cipher:depends({encryption="psk"})
 cipher:depends({encryption="psk2"})
 cipher:depends({encryption="wpa-mixed"})
@@ -580,7 +627,7 @@ end
 function encr.write(self, section, value)
 	local e = tostring(encr:formvalue(section))
 	local c = tostring(cipher:formvalue(section))
-	if value == "wpa" or value == "wpa2"  then
+	if value == "wpa" or value == "wpa2" or value == "wpa3" or value == "wpa3-mixed" then
 		self.map.uci:delete("wireless", section, "key")
 	end
 	if e and (c == "tkip" or c == "ccmp" or c == "tkip+ccmp") then
@@ -619,21 +666,45 @@ if hwtype == "mac80211" or hwtype == "prism2" then
 	local has_ap_eap  = (os.execute("hostapd -veap >/dev/null 2>/dev/null") == 0)
 	local has_sta_eap = (os.execute("wpa_supplicant -veap >/dev/null 2>/dev/null") == 0)
 
+	-- Probe SAE support
+	local has_ap_sae  = (os.execute("hostapd -vsae >/dev/null 2>/dev/null") == 0)
+	local has_sta_sae = (os.execute("wpa_supplicant -vsae >/dev/null 2>/dev/null") == 0)
+
+	-- Probe Suite-B support
+	local has_ap_eap192  = (os.execute("hostapd -vsuiteb192 >/dev/null 2>/dev/null") == 0)
+	local has_sta_eap192 = (os.execute("wpa_supplicant -vsuiteb192 >/dev/null 2>/dev/null") == 0)
+
 	if hostapd and supplicant then
 		encr:value("psk", "WPA-PSK", {mode="ap"}, {mode="sta"}, {mode="ap-wds"}, {mode="sta-wds"}, {mode="adhoc"})
 		encr:value("psk2", "WPA2-PSK", {mode="ap"}, {mode="sta"}, {mode="ap-wds"}, {mode="sta-wds"}, {mode="adhoc"})
 		encr:value("psk-mixed", "WPA-PSK/WPA2-PSK Mixed Mode", {mode="ap"}, {mode="sta"}, {mode="ap-wds"}, {mode="sta-wds"}, {mode="adhoc"})
+		if has_ap_sae and has_sta_sae then
+			encr:value("sae", "WPA3-SAE", {mode="ap"}, {mode="sta"}, {mode="ap-wds"}, {mode="sta-wds"}, {mode="adhoc"}, {mode="mesh"})
+			encr:value("sae-mixed", "WPA2-PSK/WPA3-SAE Mixed Mode", {mode="ap"}, {mode="sta"}, {mode="ap-wds"}, {mode="sta-wds"}, {mode="adhoc"})
+		end
 		if has_ap_eap and has_sta_eap then
 			encr:value("wpa", "WPA-EAP", {mode="ap"}, {mode="sta"}, {mode="ap-wds"}, {mode="sta-wds"})
 			encr:value("wpa2", "WPA2-EAP", {mode="ap"}, {mode="sta"}, {mode="ap-wds"}, {mode="sta-wds"})
+			if has_ap_eap192 and has_sta_eap192 then
+				encr:value("wpa3", "WPA3-EAP", {mode="ap"}, {mode="sta"}, {mode="ap-wds"}, {mode="sta-wds"})
+				encr:value("wpa3-mixed", "WPA2-EAP/WPA3-EAP Mixed Mode", {mode="ap"}, {mode="sta"}, {mode="ap-wds"}, {mode="sta-wds"})
+			end
 		end
 	elseif hostapd and not supplicant then
 		encr:value("psk", "WPA-PSK", {mode="ap"}, {mode="ap-wds"})
 		encr:value("psk2", "WPA2-PSK", {mode="ap"}, {mode="ap-wds"})
 		encr:value("psk-mixed", "WPA-PSK/WPA2-PSK Mixed Mode", {mode="ap"}, {mode="ap-wds"})
+		if has_ap_sae then
+			encr:value("sae", "WPA3-SAE", {mode="ap"}, {mode="ap-wds"})
+			encr:value("sae-mixed", "WPA2-PSK/WPA3-SAE Mixed Mode", {mode="ap"}, {mode="ap-wds"})
+		end
 		if has_ap_eap then
 			encr:value("wpa", "WPA-EAP", {mode="ap"}, {mode="ap-wds"})
 			encr:value("wpa2", "WPA2-EAP", {mode="ap"}, {mode="ap-wds"})
+			if has_ap_eap192 then
+				encr:value("wpa3", "WPA3-EAP", {mode="ap"}, {mode="ap-wds"})
+				encr:value("wpa3-mixed", "WPA2-EAP/WPA3-EAP Mixed Mode", {mode="ap"}, {mode="ap-wds"})
+			end
 		end
 		encr.description = translate(
 			"WPA-Encryption requires wpa_supplicant (for client mode) or hostapd (for AP " ..
@@ -643,9 +714,17 @@ if hwtype == "mac80211" or hwtype == "prism2" then
 		encr:value("psk", "WPA-PSK", {mode="sta"}, {mode="sta-wds"}, {mode="adhoc"})
 		encr:value("psk2", "WPA2-PSK", {mode="sta"}, {mode="sta-wds"}, {mode="adhoc"})
 		encr:value("psk-mixed", "WPA-PSK/WPA2-PSK Mixed Mode", {mode="sta"}, {mode="sta-wds"}, {mode="adhoc"})
+		if has_sta_sae then
+			encr:value("sae", "WPA3-SAE", {mode="sta"}, {mode="sta-wds"}, {mode="mesh"})
+			encr:value("sae-mixed", "WPA2-PSK/WPA3-SAE Mixed Mode", {mode="sta"}, {mode="sta-wds"})
+		end
 		if has_sta_eap then
 			encr:value("wpa", "WPA-EAP", {mode="sta"}, {mode="sta-wds"})
 			encr:value("wpa2", "WPA2-EAP", {mode="sta"}, {mode="sta-wds"})
+			if has_sta_eap192 then
+				encr:value("wpa3", "WPA3-EAP", {mode="sta"}, {mode="sta-wds"})
+				encr:value("wpa3-mixed", "WPA2-EAP/WPA3-EAP Mixed Mode", {mode="sta"}, {mode="sta-wds"})
+			end
 		end
 		encr.description = translate(
 			"WPA-Encryption requires wpa_supplicant (for client mode) or hostapd (for AP " ..
@@ -666,48 +745,72 @@ end
 auth_server = s:taboption("encryption", Value, "auth_server", translate("Radius-Authentication-Server"))
 auth_server:depends({mode="ap", encryption="wpa"})
 auth_server:depends({mode="ap", encryption="wpa2"})
+auth_server:depends({mode="ap", encryption="wpa3"})
+auth_server:depends({mode="ap", encryption="wpa3-mixed"})
 auth_server:depends({mode="ap-wds", encryption="wpa"})
 auth_server:depends({mode="ap-wds", encryption="wpa2"})
+auth_server:depends({mode="ap-wds", encryption="wpa3"})
+auth_server:depends({mode="ap-wds", encryption="wpa3-mixed"})
 auth_server.rmempty = true
 auth_server.datatype = "host(0)"
 
 auth_port = s:taboption("encryption", Value, "auth_port", translate("Radius-Authentication-Port"), translatef("Default %d", 1812))
 auth_port:depends({mode="ap", encryption="wpa"})
 auth_port:depends({mode="ap", encryption="wpa2"})
+auth_port:depends({mode="ap", encryption="wpa3"})
+auth_port:depends({mode="ap", encryption="wpa3-mixed"})
 auth_port:depends({mode="ap-wds", encryption="wpa"})
 auth_port:depends({mode="ap-wds", encryption="wpa2"})
+auth_port:depends({mode="ap-wds", encryption="wpa3"})
+auth_port:depends({mode="ap-wds", encryption="wpa3-mixed"})
 auth_port.rmempty = true
 auth_port.datatype = "port"
 
 auth_secret = s:taboption("encryption", Value, "auth_secret", translate("Radius-Authentication-Secret"))
 auth_secret:depends({mode="ap", encryption="wpa"})
 auth_secret:depends({mode="ap", encryption="wpa2"})
+auth_secret:depends({mode="ap", encryption="wpa3"})
+auth_secret:depends({mode="ap", encryption="wpa3-mixed"})
 auth_secret:depends({mode="ap-wds", encryption="wpa"})
 auth_secret:depends({mode="ap-wds", encryption="wpa2"})
+auth_secret:depends({mode="ap-wds", encryption="wpa3"})
+auth_secret:depends({mode="ap-wds", encryption="wpa3-mixed"})
 auth_secret.rmempty = true
 auth_secret.password = true
 
 acct_server = s:taboption("encryption", Value, "acct_server", translate("Radius-Accounting-Server"))
 acct_server:depends({mode="ap", encryption="wpa"})
 acct_server:depends({mode="ap", encryption="wpa2"})
+acct_server:depends({mode="ap", encryption="wpa3"})
+acct_server:depends({mode="ap", encryption="wpa3-mixed"})
 acct_server:depends({mode="ap-wds", encryption="wpa"})
 acct_server:depends({mode="ap-wds", encryption="wpa2"})
+acct_server:depends({mode="ap-wds", encryption="wpa3"})
+acct_server:depends({mode="ap-wds", encryption="wpa3-mixed"})
 acct_server.rmempty = true
 acct_server.datatype = "host(0)"
 
 acct_port = s:taboption("encryption", Value, "acct_port", translate("Radius-Accounting-Port"), translatef("Default %d", 1813))
 acct_port:depends({mode="ap", encryption="wpa"})
 acct_port:depends({mode="ap", encryption="wpa2"})
+acct_port:depends({mode="ap", encryption="wpa3"})
+acct_port:depends({mode="ap", encryption="wpa3-mixed"})
 acct_port:depends({mode="ap-wds", encryption="wpa"})
 acct_port:depends({mode="ap-wds", encryption="wpa2"})
+acct_port:depends({mode="ap-wds", encryption="wpa3"})
+acct_port:depends({mode="ap-wds", encryption="wpa3-mixed"})
 acct_port.rmempty = true
 acct_port.datatype = "port"
 
 acct_secret = s:taboption("encryption", Value, "acct_secret", translate("Radius-Accounting-Secret"))
 acct_secret:depends({mode="ap", encryption="wpa"})
 acct_secret:depends({mode="ap", encryption="wpa2"})
+acct_secret:depends({mode="ap", encryption="wpa3"})
+acct_secret:depends({mode="ap", encryption="wpa3-mixed"})
 acct_secret:depends({mode="ap-wds", encryption="wpa"})
 acct_secret:depends({mode="ap-wds", encryption="wpa2"})
+acct_secret:depends({mode="ap-wds", encryption="wpa3"})
+acct_secret:depends({mode="ap-wds", encryption="wpa3-mixed"})
 acct_secret.rmempty = true
 acct_secret.password = true
 
@@ -716,6 +819,8 @@ wpakey:depends("encryption", "psk")
 wpakey:depends("encryption", "psk2")
 wpakey:depends("encryption", "psk+psk2")
 wpakey:depends("encryption", "psk-mixed")
+wpakey:depends("encryption", "sae")
+wpakey:depends("encryption", "sae-mixed")
 wpakey.datatype = "wpakey"
 wpakey.rmempty = true
 wpakey.password = true
@@ -743,7 +848,7 @@ wepslot:value("3", translatef("Key #%d", 3))
 wepslot:value("4", translatef("Key #%d", 4))
 
 wepslot.cfgvalue = function(self, section)
-	local slot = tonumber(m.uci:get("wireless", section, "key"))
+	local slot = tonumber(m.uci:get("wireless", section, "key") or "")
 	if not slot or slot < 1 or slot > 4 then
 		return 1
 	end
@@ -774,6 +879,90 @@ end
 
 if hwtype == "mac80211" or hwtype == "prism2" then
 
+	-- Probe 802.11k support
+	ieee80211k = s:taboption("encryption", Flag, "ieee80211k",
+		translate("802.11k"),
+		translate("Enables The 802.11k standard provides information " ..
+			"to discover the best available access point"))
+	ieee80211k:depends({mode="ap", encryption="wpa"})
+	ieee80211k:depends({mode="ap", encryption="wpa2"})
+	ieee80211k:depends({mode="ap-wds", encryption="wpa"})
+	ieee80211k:depends({mode="ap-wds", encryption="wpa2"})
+	ieee80211k:depends({mode="ap", encryption="psk"})
+	ieee80211k:depends({mode="ap", encryption="psk2"})
+	ieee80211k:depends({mode="ap", encryption="psk-mixed"})
+	ieee80211k:depends({mode="ap-wds", encryption="psk"})
+	ieee80211k:depends({mode="ap-wds", encryption="psk2"})
+	ieee80211k:depends({mode="ap-wds", encryption="psk-mixed"})
+	ieee80211k:depends({mode="ap", encryption="sae"})
+	ieee80211k:depends({mode="ap", encryption="sae-mixed"})
+	ieee80211k:depends({mode="ap-wds", encryption="sae"})
+	ieee80211k:depends({mode="ap-wds", encryption="sae-mixed"})
+	ieee80211k.rmempty = true
+
+	rrmneighborreport = s:taboption("encryption", Flag, "rrm_neighbor_report",
+		translate("Enable neighbor report via radio measurements"))
+	rrmneighborreport.default = rrmneighborreport.enabled
+	rrmneighborreport:depends({ieee80211k="1"})
+	rrmneighborreport.rmempty = true
+
+	rrmbeaconreport = s:taboption("encryption", Flag, "rrm_beacon_report",
+		translate("Enable beacon report via radio measurements"))
+	rrmbeaconreport.default = rrmbeaconreport.enabled
+	rrmbeaconreport:depends({ieee80211k="1"})
+	rrmbeaconreport.rmempty = true
+	-- End of 802.11k options
+
+	-- Probe 802.11v support
+	ieee80211v = s:taboption("encryption", Flag, "ieee80211v",
+		translate("802.11v"),
+		translate("Enables 802.11v allows client devices to exchange " ..
+			"information about the network topology, tating overall " ..
+			"improvement of the wireless network."))
+	ieee80211v:depends({mode="ap", encryption="wpa"})
+	ieee80211v:depends({mode="ap", encryption="wpa2"})
+	ieee80211v:depends({mode="ap-wds", encryption="wpa"})
+	ieee80211v:depends({mode="ap-wds", encryption="wpa2"})
+	ieee80211v:depends({mode="ap", encryption="psk"})
+	ieee80211v:depends({mode="ap", encryption="psk2"})
+	ieee80211v:depends({mode="ap", encryption="psk-mixed"})
+	ieee80211v:depends({mode="ap-wds", encryption="psk"})
+	ieee80211v:depends({mode="ap-wds", encryption="psk2"})
+	ieee80211v:depends({mode="ap-wds", encryption="psk-mixed"})
+	ieee80211v:depends({mode="ap", encryption="sae"})
+	ieee80211v:depends({mode="ap", encryption="sae-mixed"})
+	ieee80211v:depends({mode="ap-wds", encryption="sae"})
+	ieee80211v:depends({mode="ap-wds", encryption="sae-mixed"})
+	ieee80211v.rmempty = true
+
+	wnmsleepmode = s:taboption("encryption", Flag, "wnm_sleep_mode",
+		translate("extended sleep mode for stations"))
+	wnmsleepmode.default = wnmsleepmode.disabled
+	wnmsleepmode:depends({ieee80211v="1"})
+	wnmsleepmode.rmempty = true
+
+	bsstransition = s:taboption("encryption", Flag, "bss_transition",
+		translate("BSS Transition Management"))
+	bsstransition.default = bsstransition.disabled
+	bsstransition:depends({ieee80211v="1"})
+	bsstransition.rmempty = true
+
+	timeadvertisement = s:taboption("encryption", ListValue,
+		"time_advertisement", translate("Time advertisement"))
+	timeadvertisement:depends({ieee80211v="1"})
+	timeadvertisement:value("0", translatef("disabled"))
+	timeadvertisement:value("2", translatef("UTC time at which the TSF timer is 0"))
+	timeadvertisement.rmempty = true
+
+	time_zone = s:taboption("encryption", Value, "time_zone",
+		translate("time zone"),
+		translate("Local time zone as specified in 8.3 of IEEE Std 1003.1-2004"))
+	time_zone:depends({time_advertisement="2"})
+	time_zone.placeholder = "UTC8"
+	time_zone.rmempty = true
+	-- End of 802.11v options
+
+
 	-- Probe 802.11r support (and EAP support as a proxy for Openwrt)
 	local has_80211r = (os.execute("hostapd -v11r 2>/dev/null || hostapd -veap 2>/dev/null") == 0)
 
@@ -785,6 +974,10 @@ if hwtype == "mac80211" or hwtype == "prism2" then
 	ieee80211r:depends({mode="ap", encryption="wpa2"})
 	ieee80211r:depends({mode="ap-wds", encryption="wpa"})
 	ieee80211r:depends({mode="ap-wds", encryption="wpa2"})
+	ieee80211r:depends({mode="ap", encryption="wpa3"})
+	ieee80211r:depends({mode="ap", encryption="wpa3-mixed"})
+	ieee80211r:depends({mode="ap-wds", encryption="wpa3"})
+	ieee80211r:depends({mode="ap-wds", encryption="wpa3-mixed"})
 	if has_80211r then
 		ieee80211r:depends({mode="ap", encryption="psk"})
 		ieee80211r:depends({mode="ap", encryption="psk2"})
@@ -792,6 +985,10 @@ if hwtype == "mac80211" or hwtype == "prism2" then
 		ieee80211r:depends({mode="ap-wds", encryption="psk"})
 		ieee80211r:depends({mode="ap-wds", encryption="psk2"})
 		ieee80211r:depends({mode="ap-wds", encryption="psk-mixed"})
+		ieee80211r:depends({mode="ap", encryption="sae"})
+		ieee80211r:depends({mode="ap", encryption="sae-mixed"})
+		ieee80211r:depends({mode="ap-wds", encryption="sae"})
+		ieee80211r:depends({mode="ap-wds", encryption="sae-mixed"})
 	end
 	ieee80211r.rmempty = true
 
@@ -800,8 +997,12 @@ if hwtype == "mac80211" or hwtype == "prism2" then
 			"802.11r R0KH-ID. Not needed with normal WPA(2)-PSK."))
 	nasid:depends({mode="ap", encryption="wpa"})
 	nasid:depends({mode="ap", encryption="wpa2"})
+	nasid:depends({mode="ap", encryption="wpa3"})
+	nasid:depends({mode="ap", encryption="wpa3-mixed"})
 	nasid:depends({mode="ap-wds", encryption="wpa"})
 	nasid:depends({mode="ap-wds", encryption="wpa2"})
+	nasid:depends({mode="ap-wds", encryption="wpa3"})
+	nasid:depends({mode="ap-wds", encryption="wpa3-mixed"})
 	nasid:depends({ieee80211r="1"})
 	nasid.rmempty = true
 
@@ -878,33 +1079,53 @@ if hwtype == "mac80211" or hwtype == "prism2" then
 	eaptype:value("fast", "FAST")
 	eaptype:depends({mode="sta", encryption="wpa"})
 	eaptype:depends({mode="sta", encryption="wpa2"})
+	eaptype:depends({mode="sta", encryption="wpa3"})
+	eaptype:depends({mode="sta", encryption="wpa3-mixed"})
 	eaptype:depends({mode="sta-wds", encryption="wpa"})
 	eaptype:depends({mode="sta-wds", encryption="wpa2"})
+	eaptype:depends({mode="sta-wds", encryption="wpa3"})
+	eaptype:depends({mode="sta-wds", encryption="wpa3-mixed"})
 
 	cacert = s:taboption("encryption", FileUpload, "ca_cert", translate("Path to CA-Certificate"))
 	cacert:depends({mode="sta", encryption="wpa"})
 	cacert:depends({mode="sta", encryption="wpa2"})
+	cacert:depends({mode="sta", encryption="wpa3"})
+	cacert:depends({mode="sta", encryption="wpa3-mixed"})
 	cacert:depends({mode="sta-wds", encryption="wpa"})
 	cacert:depends({mode="sta-wds", encryption="wpa2"})
+	cacert:depends({mode="sta-wds", encryption="wpa3"})
+	cacert:depends({mode="sta-wds", encryption="wpa3-mixed"})
 	cacert.rmempty = true
 
 	clientcert = s:taboption("encryption", FileUpload, "client_cert", translate("Path to Client-Certificate"))
 	clientcert:depends({mode="sta", eap_type="tls", encryption="wpa"})
 	clientcert:depends({mode="sta", eap_type="tls", encryption="wpa2"})
+	clientcert:depends({mode="sta", eap_type="tls", encryption="wpa3"})
+	clientcert:depends({mode="sta", eap_type="tls", encryption="wpa3-mixed"})
 	clientcert:depends({mode="sta-wds", eap_type="tls", encryption="wpa"})
 	clientcert:depends({mode="sta-wds", eap_type="tls", encryption="wpa2"})
+	clientcert:depends({mode="sta-wds", eap_type="tls", encryption="wpa3"})
+	clientcert:depends({mode="sta-wds", eap_type="tls", encryption="wpa3-mixed"})
 
 	privkey = s:taboption("encryption", FileUpload, "priv_key", translate("Path to Private Key"))
-	privkey:depends({mode="sta", eap_type="tls", encryption="wpa2"})
 	privkey:depends({mode="sta", eap_type="tls", encryption="wpa"})
-	privkey:depends({mode="sta-wds", eap_type="tls", encryption="wpa2"})
+	privkey:depends({mode="sta", eap_type="tls", encryption="wpa2"})
+	privkey:depends({mode="sta", eap_type="tls", encryption="wpa3"})
+	privkey:depends({mode="sta", eap_type="tls", encryption="wpa3-mixed"})
 	privkey:depends({mode="sta-wds", eap_type="tls", encryption="wpa"})
+	privkey:depends({mode="sta-wds", eap_type="tls", encryption="wpa2"})
+	privkey:depends({mode="sta-wds", eap_type="tls", encryption="wpa3"})
+	privkey:depends({mode="sta-wds", eap_type="tls", encryption="wpa3-mixed"})
 
 	privkeypwd = s:taboption("encryption", Value, "priv_key_pwd", translate("Password of Private Key"))
-	privkeypwd:depends({mode="sta", eap_type="tls", encryption="wpa2"})
 	privkeypwd:depends({mode="sta", eap_type="tls", encryption="wpa"})
-	privkeypwd:depends({mode="sta-wds", eap_type="tls", encryption="wpa2"})
+	privkeypwd:depends({mode="sta", eap_type="tls", encryption="wpa2"})
+	privkeypwd:depends({mode="sta", eap_type="tls", encryption="wpa3"})
+	privkeypwd:depends({mode="sta", eap_type="tls", encryption="wpa3-mixed"})
 	privkeypwd:depends({mode="sta-wds", eap_type="tls", encryption="wpa"})
+	privkeypwd:depends({mode="sta-wds", eap_type="tls", encryption="wpa2"})
+	privkeypwd:depends({mode="sta-wds", eap_type="tls", encryption="wpa3"})
+	privkeypwd:depends({mode="sta-wds", eap_type="tls", encryption="wpa3-mixed"})
 	privkeypwd.rmempty = true
 	privkeypwd.password = true
 
@@ -917,94 +1138,166 @@ if hwtype == "mac80211" or hwtype == "prism2" then
 	auth:value("EAP-MD5")
 	auth:value("EAP-MSCHAPV2")
 	auth:value("EAP-TLS")
-	auth:depends({mode="sta", eap_type="fast", encryption="wpa2"})
 	auth:depends({mode="sta", eap_type="fast", encryption="wpa"})
-	auth:depends({mode="sta", eap_type="peap", encryption="wpa2"})
+	auth:depends({mode="sta", eap_type="fast", encryption="wpa2"})
+	auth:depends({mode="sta", eap_type="fast", encryption="wpa3"})
+	auth:depends({mode="sta", eap_type="fast", encryption="wpa3-mixed"})
 	auth:depends({mode="sta", eap_type="peap", encryption="wpa"})
-	auth:depends({mode="sta", eap_type="ttls", encryption="wpa2"})
+	auth:depends({mode="sta", eap_type="peap", encryption="wpa2"})
+	auth:depends({mode="sta", eap_type="peap", encryption="wpa3"})
+	auth:depends({mode="sta", eap_type="peap", encryption="wpa3-mixed"})
 	auth:depends({mode="sta", eap_type="ttls", encryption="wpa"})
-	auth:depends({mode="sta-wds", eap_type="fast", encryption="wpa2"})
+	auth:depends({mode="sta", eap_type="ttls", encryption="wpa2"})
+	auth:depends({mode="sta", eap_type="ttls", encryption="wpa3"})
+	auth:depends({mode="sta", eap_type="ttls", encryption="wpa3-mixed"})
 	auth:depends({mode="sta-wds", eap_type="fast", encryption="wpa"})
-	auth:depends({mode="sta-wds", eap_type="peap", encryption="wpa2"})
+	auth:depends({mode="sta-wds", eap_type="fast", encryption="wpa2"})
+	auth:depends({mode="sta-wds", eap_type="fast", encryption="wpa3"})
+	auth:depends({mode="sta-wds", eap_type="fast", encryption="wpa3-mixed"})
 	auth:depends({mode="sta-wds", eap_type="peap", encryption="wpa"})
-	auth:depends({mode="sta-wds", eap_type="ttls", encryption="wpa2"})
+	auth:depends({mode="sta-wds", eap_type="peap", encryption="wpa2"})
+	auth:depends({mode="sta-wds", eap_type="peap", encryption="wpa3"})
+	auth:depends({mode="sta-wds", eap_type="peap", encryption="wpa3-mixed"})
 	auth:depends({mode="sta-wds", eap_type="ttls", encryption="wpa"})
+	auth:depends({mode="sta-wds", eap_type="ttls", encryption="wpa2"})
+	auth:depends({mode="sta-wds", eap_type="ttls", encryption="wpa3"})
+	auth:depends({mode="sta-wds", eap_type="ttls", encryption="wpa3-mixed"})
 
 	cacert2 = s:taboption("encryption", FileUpload, "ca_cert2", translate("Path to inner CA-Certificate"))
 	cacert2:depends({mode="sta", auth="EAP-TLS", encryption="wpa"})
 	cacert2:depends({mode="sta", auth="EAP-TLS", encryption="wpa2"})
+	cacert2:depends({mode="sta", auth="EAP-TLS", encryption="wpa3"})
+	cacert2:depends({mode="sta", auth="EAP-TLS", encryption="wpa3-mixed"})
 	cacert2:depends({mode="sta-wds", auth="EAP-TLS", encryption="wpa"})
 	cacert2:depends({mode="sta-wds", auth="EAP-TLS", encryption="wpa2"})
+	cacert2:depends({mode="sta-wds", auth="EAP-TLS", encryption="wpa3"})
+	cacert2:depends({mode="sta-wds", auth="EAP-TLS", encryption="wpa3-mixed"})
 
 	clientcert2 = s:taboption("encryption", FileUpload, "client_cert2", translate("Path to inner Client-Certificate"))
 	clientcert2:depends({mode="sta", auth="EAP-TLS", encryption="wpa"})
 	clientcert2:depends({mode="sta", auth="EAP-TLS", encryption="wpa2"})
+	clientcert2:depends({mode="sta", auth="EAP-TLS", encryption="wpa3"})
+	clientcert2:depends({mode="sta", auth="EAP-TLS", encryption="wpa3-mixed"})
 	clientcert2:depends({mode="sta-wds", auth="EAP-TLS", encryption="wpa"})
 	clientcert2:depends({mode="sta-wds", auth="EAP-TLS", encryption="wpa2"})
+	clientcert2:depends({mode="sta-wds", auth="EAP-TLS", encryption="wpa3"})
+	clientcert2:depends({mode="sta-wds", auth="EAP-TLS", encryption="wpa3-mixed"})
 
 	privkey2 = s:taboption("encryption", FileUpload, "priv_key2", translate("Path to inner Private Key"))
 	privkey2:depends({mode="sta", auth="EAP-TLS", encryption="wpa"})
 	privkey2:depends({mode="sta", auth="EAP-TLS", encryption="wpa2"})
+	privkey2:depends({mode="sta", auth="EAP-TLS", encryption="wpa3"})
+	privkey2:depends({mode="sta", auth="EAP-TLS", encryption="wpa3-mixed"})
 	privkey2:depends({mode="sta-wds", auth="EAP-TLS", encryption="wpa"})
 	privkey2:depends({mode="sta-wds", auth="EAP-TLS", encryption="wpa2"})
+	privkey2:depends({mode="sta-wds", auth="EAP-TLS", encryption="wpa3"})
+	privkey2:depends({mode="sta-wds", auth="EAP-TLS", encryption="wpa3-mixed"})
 
 	privkeypwd2 = s:taboption("encryption", Value, "priv_key2_pwd", translate("Password of inner Private Key"))
 	privkeypwd2:depends({mode="sta", auth="EAP-TLS", encryption="wpa"})
 	privkeypwd2:depends({mode="sta", auth="EAP-TLS", encryption="wpa2"})
+	privkeypwd2:depends({mode="sta", auth="EAP-TLS", encryption="wpa3"})
+	privkeypwd2:depends({mode="sta", auth="EAP-TLS", encryption="wpa3-mixed"})
 	privkeypwd2:depends({mode="sta-wds", auth="EAP-TLS", encryption="wpa"})
 	privkeypwd2:depends({mode="sta-wds", auth="EAP-TLS", encryption="wpa2"})
+	privkeypwd2:depends({mode="sta-wds", auth="EAP-TLS", encryption="wpa3"})
+	privkeypwd2:depends({mode="sta-wds", auth="EAP-TLS", encryption="wpa3-mixed"})
 	privkeypwd2.rmempty = true
 	privkeypwd2.password = true
 
 	identity = s:taboption("encryption", Value, "identity", translate("Identity"))
-	identity:depends({mode="sta", eap_type="fast", encryption="wpa2"})
 	identity:depends({mode="sta", eap_type="fast", encryption="wpa"})
-	identity:depends({mode="sta", eap_type="peap", encryption="wpa2"})
+	identity:depends({mode="sta", eap_type="fast", encryption="wpa2"})
+	identity:depends({mode="sta", eap_type="fast", encryption="wpa3"})
+	identity:depends({mode="sta", eap_type="fast", encryption="wpa3-mixed"})
 	identity:depends({mode="sta", eap_type="peap", encryption="wpa"})
-	identity:depends({mode="sta", eap_type="ttls", encryption="wpa2"})
+	identity:depends({mode="sta", eap_type="peap", encryption="wpa2"})
+	identity:depends({mode="sta", eap_type="peap", encryption="wpa3"})
+	identity:depends({mode="sta", eap_type="peap", encryption="wpa3-mixed"})
 	identity:depends({mode="sta", eap_type="ttls", encryption="wpa"})
-	identity:depends({mode="sta-wds", eap_type="fast", encryption="wpa2"})
+	identity:depends({mode="sta", eap_type="ttls", encryption="wpa2"})
+	identity:depends({mode="sta", eap_type="ttls", encryption="wpa3"})
+	identity:depends({mode="sta", eap_type="ttls", encryption="wpa3-mixed"})
 	identity:depends({mode="sta-wds", eap_type="fast", encryption="wpa"})
-	identity:depends({mode="sta-wds", eap_type="peap", encryption="wpa2"})
+	identity:depends({mode="sta-wds", eap_type="fast", encryption="wpa2"})
+	identity:depends({mode="sta-wds", eap_type="fast", encryption="wpa3"})
+	identity:depends({mode="sta-wds", eap_type="fast", encryption="wpa3-mixed"})
 	identity:depends({mode="sta-wds", eap_type="peap", encryption="wpa"})
-	identity:depends({mode="sta-wds", eap_type="ttls", encryption="wpa2"})
+	identity:depends({mode="sta-wds", eap_type="peap", encryption="wpa2"})
+	identity:depends({mode="sta-wds", eap_type="peap", encryption="wpa3"})
+	identity:depends({mode="sta-wds", eap_type="peap", encryption="wpa3-mixed"})
 	identity:depends({mode="sta-wds", eap_type="ttls", encryption="wpa"})
-	identity:depends({mode="sta", eap_type="tls", encryption="wpa2"})
+	identity:depends({mode="sta-wds", eap_type="ttls", encryption="wpa2"})
+	identity:depends({mode="sta-wds", eap_type="ttls", encryption="wpa3"})
+	identity:depends({mode="sta-wds", eap_type="ttls", encryption="wpa3-mixed"})
 	identity:depends({mode="sta", eap_type="tls", encryption="wpa"})
-	identity:depends({mode="sta-wds", eap_type="tls", encryption="wpa2"})
+	identity:depends({mode="sta", eap_type="tls", encryption="wpa2"})
+	identity:depends({mode="sta", eap_type="tls", encryption="wpa3"})
+	identity:depends({mode="sta", eap_type="tls", encryption="wpa3-mixed"})
 	identity:depends({mode="sta-wds", eap_type="tls", encryption="wpa"})
+	identity:depends({mode="sta-wds", eap_type="tls", encryption="wpa2"})
+	identity:depends({mode="sta-wds", eap_type="tls", encryption="wpa3"})
+	identity:depends({mode="sta-wds", eap_type="tls", encryption="wpa3-mixed"})
 
 	anonymous_identity = s:taboption("encryption", Value, "anonymous_identity", translate("Anonymous Identity"))
-	anonymous_identity:depends({mode="sta", eap_type="fast", encryption="wpa2"})
 	anonymous_identity:depends({mode="sta", eap_type="fast", encryption="wpa"})
-	anonymous_identity:depends({mode="sta", eap_type="peap", encryption="wpa2"})
+	anonymous_identity:depends({mode="sta", eap_type="fast", encryption="wpa2"})
+	anonymous_identity:depends({mode="sta", eap_type="fast", encryption="wpa3"})
+	anonymous_identity:depends({mode="sta", eap_type="fast", encryption="wpa3-mixed"})
 	anonymous_identity:depends({mode="sta", eap_type="peap", encryption="wpa"})
-	anonymous_identity:depends({mode="sta", eap_type="ttls", encryption="wpa2"})
+	anonymous_identity:depends({mode="sta", eap_type="peap", encryption="wpa2"})
+	anonymous_identity:depends({mode="sta", eap_type="peap", encryption="wpa3"})
+	anonymous_identity:depends({mode="sta", eap_type="peap", encryption="wpa3-mixed"})
 	anonymous_identity:depends({mode="sta", eap_type="ttls", encryption="wpa"})
-	anonymous_identity:depends({mode="sta-wds", eap_type="fast", encryption="wpa2"})
+	anonymous_identity:depends({mode="sta", eap_type="ttls", encryption="wpa2"})
+	anonymous_identity:depends({mode="sta", eap_type="ttls", encryption="wpa3"})
+	anonymous_identity:depends({mode="sta", eap_type="ttls", encryption="wpa3-mixed"})
 	anonymous_identity:depends({mode="sta-wds", eap_type="fast", encryption="wpa"})
-	anonymous_identity:depends({mode="sta-wds", eap_type="peap", encryption="wpa2"})
+	anonymous_identity:depends({mode="sta-wds", eap_type="fast", encryption="wpa2"})
+	anonymous_identity:depends({mode="sta-wds", eap_type="fast", encryption="wpa3"})
+	anonymous_identity:depends({mode="sta-wds", eap_type="fast", encryption="wpa3-mixed"})
 	anonymous_identity:depends({mode="sta-wds", eap_type="peap", encryption="wpa"})
-	anonymous_identity:depends({mode="sta-wds", eap_type="ttls", encryption="wpa2"})
+	anonymous_identity:depends({mode="sta-wds", eap_type="peap", encryption="wpa2"})
+	anonymous_identity:depends({mode="sta-wds", eap_type="peap", encryption="wpa3"})
+	anonymous_identity:depends({mode="sta-wds", eap_type="peap", encryption="wpa3-mixed"})
 	anonymous_identity:depends({mode="sta-wds", eap_type="ttls", encryption="wpa"})
-	anonymous_identity:depends({mode="sta", eap_type="tls", encryption="wpa2"})
+	anonymous_identity:depends({mode="sta-wds", eap_type="ttls", encryption="wpa2"})
+	anonymous_identity:depends({mode="sta-wds", eap_type="ttls", encryption="wpa3"})
+	anonymous_identity:depends({mode="sta-wds", eap_type="ttls", encryption="wpa3-mixed"})
 	anonymous_identity:depends({mode="sta", eap_type="tls", encryption="wpa"})
-	anonymous_identity:depends({mode="sta-wds", eap_type="tls", encryption="wpa2"})
+	anonymous_identity:depends({mode="sta", eap_type="tls", encryption="wpa2"})
+	anonymous_identity:depends({mode="sta", eap_type="tls", encryption="wpa3"})
+	anonymous_identity:depends({mode="sta", eap_type="tls", encryption="wpa3-mixed"})
 	anonymous_identity:depends({mode="sta-wds", eap_type="tls", encryption="wpa"})
+	anonymous_identity:depends({mode="sta-wds", eap_type="tls", encryption="wpa2"})
+	anonymous_identity:depends({mode="sta-wds", eap_type="tls", encryption="wpa3"})
+	anonymous_identity:depends({mode="sta-wds", eap_type="tls", encryption="wpa3-mixed"})
 
 	password = s:taboption("encryption", Value, "password", translate("Password"))
-	password:depends({mode="sta", eap_type="fast", encryption="wpa2"})
 	password:depends({mode="sta", eap_type="fast", encryption="wpa"})
-	password:depends({mode="sta", eap_type="peap", encryption="wpa2"})
+	password:depends({mode="sta", eap_type="fast", encryption="wpa2"})
+	password:depends({mode="sta", eap_type="fast", encryption="wpa3"})
+	password:depends({mode="sta", eap_type="fast", encryption="wpa3-mixed"})
 	password:depends({mode="sta", eap_type="peap", encryption="wpa"})
-	password:depends({mode="sta", eap_type="ttls", encryption="wpa2"})
+	password:depends({mode="sta", eap_type="peap", encryption="wpa2"})
+	password:depends({mode="sta", eap_type="peap", encryption="wpa3"})
+	password:depends({mode="sta", eap_type="peap", encryption="wpa3-mixed"})
 	password:depends({mode="sta", eap_type="ttls", encryption="wpa"})
-	password:depends({mode="sta-wds", eap_type="fast", encryption="wpa2"})
+	password:depends({mode="sta", eap_type="ttls", encryption="wpa2"})
+	password:depends({mode="sta", eap_type="ttls", encryption="wpa3"})
+	password:depends({mode="sta", eap_type="ttls", encryption="wpa3-mixed"})
 	password:depends({mode="sta-wds", eap_type="fast", encryption="wpa"})
-	password:depends({mode="sta-wds", eap_type="peap", encryption="wpa2"})
+	password:depends({mode="sta-wds", eap_type="fast", encryption="wpa2"})
+	password:depends({mode="sta-wds", eap_type="fast", encryption="wpa3"})
+	password:depends({mode="sta-wds", eap_type="fast", encryption="wpa3-mixed"})
 	password:depends({mode="sta-wds", eap_type="peap", encryption="wpa"})
-	password:depends({mode="sta-wds", eap_type="ttls", encryption="wpa2"})
+	password:depends({mode="sta-wds", eap_type="peap", encryption="wpa2"})
+	password:depends({mode="sta-wds", eap_type="peap", encryption="wpa3"})
+	password:depends({mode="sta-wds", eap_type="peap", encryption="wpa3-mixed"})
 	password:depends({mode="sta-wds", eap_type="ttls", encryption="wpa"})
+	password:depends({mode="sta-wds", eap_type="ttls", encryption="wpa2"})
+	password:depends({mode="sta-wds", eap_type="ttls", encryption="wpa3"})
+	password:depends({mode="sta-wds", eap_type="ttls", encryption="wpa3-mixed"})
 	password.rmempty = true
 	password.password = true
 end
@@ -1015,9 +1308,7 @@ if hwtype == "mac80211" then
 	if has_80211w then
 		ieee80211w = s:taboption("encryption", ListValue, "ieee80211w",
 			translate("802.11w Management Frame Protection"),
-			translate("Requires the 'full' version of wpad/hostapd " ..
-				"and support from the wifi driver <br />(as of Feb 2017: " ..
-				"ath9k and ath10k, in LEDE also mwlwifi and mt76)"))
+			translate("Note: Some wireless drivers do not fully support 802.11w. E.g. mwlwifi may have problems"))
 		ieee80211w.default = ""
 		ieee80211w.rmempty = true
 		ieee80211w:value("", translate("Disabled (default)"))
@@ -1029,6 +1320,14 @@ if hwtype == "mac80211" then
 		ieee80211w:depends({mode="ap", encryption="psk-mixed"})
 		ieee80211w:depends({mode="ap-wds", encryption="psk2"})
 		ieee80211w:depends({mode="ap-wds", encryption="psk-mixed"})
+		ieee80211w:depends({mode="ap", encryption="sae"})
+		ieee80211w:depends({mode="ap", encryption="sae-mixed"})
+		ieee80211w:depends({mode="ap-wds", encryption="sae"})
+		ieee80211w:depends({mode="ap-wds", encryption="sae-mixed"})
+		ieee80211w:depends({mode="ap", encryption="wpa3"})
+		ieee80211w:depends({mode="ap", encryption="wpa3-mixed"})
+		ieee80211w:depends({mode="ap-wds", encryption="wpa3"})
+		ieee80211w:depends({mode="ap-wds", encryption="wpa3-mixed"})
 
 		max_timeout = s:taboption("encryption", Value, "ieee80211w_max_timeout",
 				translate("802.11w maximum timeout"),
@@ -1051,7 +1350,10 @@ if hwtype == "mac80211" then
 
 	local key_retries = s:taboption("encryption", Flag, "wpa_disable_eapol_key_retries",
 		translate("Enable key reinstallation (KRACK) countermeasures"),
-		translate("Complicates key reinstallation attacks on the client side by disabling retransmission of EAPOL-Key frames that are used to install keys. This workaround might cause interoperability issues and reduced robustness of key negotiation especially in environments with heavy traffic load."))
+		translate("Complicates key reinstallation attacks on the client side by disabling " ..
+			"retransmission of EAPOL-Key frames that are used to install keys. This " ..
+			"workaround might cause interoperability issues and reduced robustness of " ..
+			"key negotiation especially in environments with heavy traffic load."))
 
 	key_retries:depends({mode="ap", encryption="wpa2"})
 	key_retries:depends({mode="ap", encryption="psk2"})
@@ -1059,6 +1361,14 @@ if hwtype == "mac80211" then
 	key_retries:depends({mode="ap-wds", encryption="wpa2"})
 	key_retries:depends({mode="ap-wds", encryption="psk2"})
 	key_retries:depends({mode="ap-wds", encryption="psk-mixed"})
+	key_retries:depends({mode="ap", encryption="sae"})
+	key_retries:depends({mode="ap", encryption="sae-mixed"})
+	key_retries:depends({mode="ap-wds", encryption="sae"})
+	key_retries:depends({mode="ap-wds", encryption="sae-mixed"})
+	key_retries:depends({mode="ap", encryption="wpa3"})
+	key_retries:depends({mode="ap", encryption="wpa3-mixed"})
+	key_retries:depends({mode="ap-wds", encryption="wpa3"})
+	key_retries:depends({mode="ap-wds", encryption="wpa3-mixed"})
 end
 
 if hwtype == "mac80211" or hwtype == "prism2" then
@@ -1072,6 +1382,8 @@ if hwtype == "mac80211" or hwtype == "prism2" then
 		wps:depends("encryption", "psk")
 		wps:depends("encryption", "psk2")
 		wps:depends("encryption", "psk-mixed")
+		wps:depends("encryption", "sae")
+		wps:depends("encryption", "sae-mixed")
 	end
 end
 

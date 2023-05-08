@@ -1,18 +1,16 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"PO-Revision-Date: 2013-02-02 14:32+0200\n"
-"Last-Translator: oranav <oranav@gmail.com>\n"
-"Language-Team: none\n"
+"PO-Revision-Date: 2021-01-15 22:31+0000\n"
+"Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
+"Language-Team: Hebrew <https://hosted.weblate.org/projects/openwrt/luci/he/"
+">\n"
 "Language: he\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Pootle 2.0.6\n"
-
-msgid "%.1f dB"
-msgstr ""
+"X-Generator: Weblate 4.5-dev\n"
 
 msgid "%s is untagged in multiple VLANs!"
 msgstr ""
@@ -27,7 +25,7 @@ msgid "(empty)"
 msgstr "(ריק)"
 
 msgid "(no interfaces attached)"
-msgstr "(אין ממשק מצורף)"
+msgstr "(לא צורף אף מנשק)"
 
 msgid "-- Additional Field --"
 msgstr "-- שדה נוסף --"
@@ -42,7 +40,7 @@ msgid "-- match by device --"
 msgstr ""
 
 msgid "-- match by label --"
-msgstr ""
+msgstr "-- התאמה לפי תווית --"
 
 msgid "-- match by uuid --"
 msgstr ""
@@ -130,9 +128,6 @@ msgstr "שם <abbr title=\"Light Emitting Diode\">LED</abbr>"
 msgid "<abbr title=\"Media Access Control\">MAC</abbr>-Address"
 msgstr "כתובת-<abbr title=\"Media Access Control\">MAC</abbr>"
 
-msgid "<abbr title=\"The DHCP Unique Identifier\">DUID</abbr>"
-msgstr ""
-
 msgid ""
 "<abbr title=\"maximal\">Max.</abbr> <abbr title=\"Dynamic Host Configuration "
 "Protocol\">DHCP</abbr> leases"
@@ -161,7 +156,7 @@ msgid "A43C + J43 + A43 + V43"
 msgstr ""
 
 msgid "ADSL"
-msgstr ""
+msgstr "ADSL"
 
 msgid "AICCU (SIXXS)"
 msgstr ""
@@ -172,9 +167,8 @@ msgstr ""
 msgid "APN"
 msgstr ""
 
-#, fuzzy
 msgid "ARP retry threshold"
-msgstr "סף נסיונות של ARP"
+msgstr "סף ניסיונות חוזרים של ARP"
 
 msgid "ATM (Asynchronous Transfer Mode)"
 msgstr ""
@@ -183,9 +177,8 @@ msgstr ""
 msgid "ATM Bridges"
 msgstr "גשרי ATM"
 
-#, fuzzy
 msgid "ATM Virtual Channel Identifier (VCI)"
-msgstr "מזהה ערוצים ווירטואליים של ATM"
+msgstr "ATM מזהה ערוץ וירטואלי (VCI)"
 
 #, fuzzy
 msgid "ATM Virtual Path Identifier (VPI)"
@@ -213,6 +206,9 @@ msgstr "מרכז גישות"
 msgid "Access Point"
 msgstr "נקודת גישה"
 
+msgid "Action"
+msgstr "פעולה"
+
 msgid "Actions"
 msgstr "פעולות"
 
@@ -237,7 +233,7 @@ msgstr "הרשאות DHCPv6 פעילות"
 # צריך אימות של מישהו שמבין יותר במושגים האלו אם צריך בכלל לתרגם את זה או להשאיר כמו שזה
 #, fuzzy
 msgid "Ad-Hoc"
-msgstr "אד-הוק"
+msgstr "אד־הוק"
 
 msgid "Add"
 msgstr "הוסף"
@@ -290,9 +286,6 @@ msgstr ""
 msgid "Allow all except listed"
 msgstr "אפשר הכל חוץ מהרשומים"
 
-msgid "Allow legacy 802.11b rates"
-msgstr ""
-
 msgid "Allow listed only"
 msgstr "אפשר רשומים בלבד"
 
@@ -314,7 +307,7 @@ msgid ""
 msgstr ""
 
 msgid "Allowed IPs"
-msgstr ""
+msgstr "כתובות IP מורשות"
 
 msgid ""
 "Also see <a href=\"https://www.sixxs.net/faq/connectivity/?faq=comparison"
@@ -565,6 +558,9 @@ msgid ""
 "preserved in any sysupgrade."
 msgstr ""
 
+msgid "Buttons"
+msgstr "כפתורים"
+
 msgid "CA certificate; if empty it will be saved after the first connection."
 msgstr ""
 
@@ -572,7 +568,7 @@ msgid "CPU usage (%)"
 msgstr "שימוש מעבד (%)"
 
 msgid "Cancel"
-msgstr "בטל"
+msgstr "ביטול"
 
 msgid "Category"
 msgstr ""
@@ -595,7 +591,7 @@ msgstr "ערוץ"
 msgid "Check"
 msgstr "לבדוק"
 
-msgid "Check filesystems before mount"
+msgid "Check fileystems before mount"
 msgstr ""
 
 msgid "Check this option to delete the existing networks from this radio."
@@ -643,20 +639,13 @@ msgid "Close list..."
 msgstr "סגור רשימה..."
 
 msgid "Collecting data..."
-msgstr "אוסף מידע..."
+msgstr "נאספים נתונים…"
 
 msgid "Command"
 msgstr "פקודה"
 
 msgid "Common Configuration"
 msgstr "הגדרות נפוצות"
-
-msgid ""
-"Complicates key reinstallation attacks on the client side by disabling "
-"retransmission of EAPOL-Key frames that are used to install keys. This "
-"workaround might cause interoperability issues and reduced robustness of key "
-"negotiation especially in environments with heavy traffic load."
-msgstr ""
 
 msgid "Configuration"
 msgstr "הגדרות"
@@ -724,11 +713,6 @@ msgid ""
 msgstr ""
 
 msgid "Custom feeds"
-msgstr ""
-
-msgid ""
-"Custom files (certificates, scripts) may remain on the system. To prevent "
-"this, perform a factory-reset first."
 msgstr ""
 
 msgid ""
@@ -940,9 +924,6 @@ msgstr "הורד והתקן חבילות"
 msgid "Download backup"
 msgstr "הורד גיבוי"
 
-msgid "Downstream SNR offset"
-msgstr ""
-
 msgid "Dropbear Instance"
 msgstr ""
 
@@ -993,11 +974,6 @@ msgstr "מצב חרום"
 msgid "Enable"
 msgstr "אפשר"
 
-msgid ""
-"Enable <abbr title=\"Internet Group Management Protocol\">IGMP</abbr> "
-"snooping"
-msgstr ""
-
 msgid "Enable <abbr title=\"Spanning Tree Protocol\">STP</abbr>"
 msgstr "אפשר <abbr title=\"Spanning Tree Protocol\">STP</abbr>"
 
@@ -1028,9 +1004,6 @@ msgstr "אפשר תפקוד VLAN"
 msgid "Enable WPS pushbutton, requires WPA(2)-PSK"
 msgstr ""
 
-msgid "Enable key reinstallation (KRACK) countermeasures"
-msgstr ""
-
 msgid "Enable learning and aging"
 msgstr "אפשר למידה והזדקנות"
 
@@ -1054,9 +1027,6 @@ msgstr ""
 
 msgid "Enabled"
 msgstr "אפשר"
-
-msgid "Enables IGMP snooping on this bridge"
-msgstr ""
 
 msgid ""
 "Enables fast roaming among access points that belong to the same Mobility "
@@ -1127,15 +1097,6 @@ msgstr ""
 msgid "Extra SSH command options"
 msgstr ""
 
-msgid "FT over DS"
-msgstr ""
-
-msgid "FT over the Air"
-msgstr ""
-
-msgid "FT protocol"
-msgstr ""
-
 msgid "File"
 msgstr ""
 
@@ -1172,7 +1133,7 @@ msgid "Firewall"
 msgstr ""
 
 msgid "Firewall Mark"
-msgstr ""
+msgstr "סימן חומת אש"
 
 msgid "Firewall Settings"
 msgstr ""
@@ -1237,9 +1198,6 @@ msgstr ""
 msgid "Forward broadcast traffic"
 msgstr ""
 
-msgid "Forward mesh peer traffic"
-msgstr ""
-
 msgid "Forwarding mode"
 msgstr ""
 
@@ -1257,7 +1215,7 @@ msgstr ""
 
 msgid ""
 "Further information about WireGuard interfaces and peers at <a href=\"http://"
-"wireguard.io\">wireguard.io</a>."
+"wireguard.com\">wireguard.com</a>."
 msgstr ""
 
 msgid "GHz"
@@ -1282,9 +1240,6 @@ msgid "General options for opkg"
 msgstr ""
 
 msgid "Generate Config"
-msgstr ""
-
-msgid "Generate PMK locally"
 msgstr ""
 
 msgid "Generate archive"
@@ -1321,6 +1276,9 @@ msgid "HE.net username"
 msgstr ""
 
 msgid "HT mode (802.11n)"
+msgstr ""
+
+msgid "Handler"
 msgstr ""
 
 msgid "Hang Up"
@@ -1489,7 +1447,7 @@ msgstr ""
 msgid "Identity"
 msgstr ""
 
-msgid "If checked, 1DES is enabled"
+msgid "If checked, 1DES is enaled"
 msgstr ""
 
 msgid "If checked, encryption is disabled"
@@ -1569,7 +1527,7 @@ msgid "Installed packages"
 msgstr ""
 
 msgid "Interface"
-msgstr ""
+msgstr "מנשק"
 
 msgid "Interface %q device auto-migrated from %q to %q."
 msgstr ""
@@ -1766,7 +1724,7 @@ msgid "Listen Interfaces"
 msgstr ""
 
 msgid "Listen Port"
-msgstr ""
+msgstr "פתחת האזנה"
 
 msgid "Listen only on the given interface or, if unspecified, on all"
 msgstr ""
@@ -1866,7 +1824,7 @@ msgid "MB/s"
 msgstr ""
 
 msgid "MD5"
-msgstr ""
+msgstr "MD5"
 
 msgid "MHz"
 msgstr ""
@@ -1897,6 +1855,9 @@ msgstr ""
 msgid "Maximum amount of seconds to wait for the modem to become ready"
 msgstr ""
 
+msgid "Maximum hold time"
+msgstr ""
+
 msgid ""
 "Maximum length of the name is 15 characters including the automatic protocol/"
 "bridge prefix (br-, 6in4-, pppoe- etc.)"
@@ -1914,10 +1875,10 @@ msgstr ""
 msgid "Memory usage (%)"
 msgstr ""
 
-msgid "Mesh Id"
+msgid "Metric"
 msgstr ""
 
-msgid "Metric"
+msgid "Minimum hold time"
 msgstr ""
 
 msgid "Mirror monitor port"
@@ -2058,7 +2019,7 @@ msgid "No files found"
 msgstr ""
 
 msgid "No information available"
-msgstr ""
+msgstr "אין פרטים זמינים"
 
 msgid "No negative cache"
 msgstr ""
@@ -2121,9 +2082,6 @@ msgid "Notice"
 msgstr ""
 
 msgid "Nslookup"
-msgstr ""
-
-msgid "Number of cached DNS entries (max is 10000, 0 is no caching)"
 msgstr ""
 
 msgid "OK"
@@ -2359,6 +2317,9 @@ msgstr ""
 msgid "Path to Private Key"
 msgstr "נתיב למפתח הפרטי"
 
+msgid "Path to executable which handles the button event"
+msgstr ""
+
 msgid "Path to inner CA-Certificate"
 msgstr ""
 
@@ -2408,7 +2369,7 @@ msgid "Policy"
 msgstr ""
 
 msgid "Port"
-msgstr ""
+msgstr "פתחה"
 
 msgid "Port status:"
 msgstr ""
@@ -2482,7 +2443,7 @@ msgid "Pseudo Ad-Hoc (ahdemo)"
 msgstr ""
 
 msgid "Public Key"
-msgstr ""
+msgstr "מפתח ציבורי"
 
 msgid "Public prefix routed to this device for distribution to clients."
 msgstr ""
@@ -2878,9 +2839,6 @@ msgstr ""
 msgid "Size (.ipk)"
 msgstr ""
 
-msgid "Size of DNS query cache"
-msgstr ""
-
 msgid "Skip"
 msgstr ""
 
@@ -2914,7 +2872,7 @@ msgid ""
 "instructions."
 msgstr ""
 "סליחה, אין תמיכה בעדכון מערכת, ולכן קושחה חדשה חייבת להיצרב ידנית. אנא פנה "
-"אל ה-wiki של OpenWrt/LEDE עבור הוראות ספציפיות למכשיר שלך."
+"אל ה-wiki של OpenWrt עבור הוראות ספציפיות למכשיר שלך."
 
 msgid "Sort"
 msgstr "מיין"
@@ -2923,6 +2881,9 @@ msgid "Source"
 msgstr "מקור"
 
 msgid "Source routing"
+msgstr ""
+
+msgid "Specifies the button state to handle"
 msgstr ""
 
 msgid "Specifies the directory the device is attached to"
@@ -3025,9 +2986,6 @@ msgstr ""
 
 msgid ""
 "Switch %q has an unknown topology - the VLAN settings might not be accurate."
-msgstr ""
-
-msgid "Switch Port Mask"
 msgstr ""
 
 msgid "Switch VLAN"
@@ -3247,7 +3205,7 @@ msgstr ""
 
 msgid ""
 "This is the local endpoint address assigned by the tunnel broker, it usually "
-"ends with <code>...:2/64</code>"
+"ends with <code>:2</code>"
 msgstr ""
 
 msgid ""
@@ -3274,11 +3232,14 @@ msgid ""
 "their status."
 msgstr "רשימה זו מציגה סקירה של תהליכי המערכת הרצים כרגע ואת מצבם."
 
+msgid "This page allows the configuration of custom button actions"
+msgstr "דף זה מאפשר להגדיר פעולות מיוחדות עבור הלחצנים."
+
 msgid "This page gives an overview over currently active network connections."
 msgstr "דף זה מציג סקירה של חיבורי הרשת הפעילים כרגע."
 
 msgid "This section contains no values yet"
-msgstr "אזור זה עדיין לא מכיל ערכים."
+msgstr "סעיף זה לא מכיל ערכים עדיין"
 
 msgid "Time Synchronization"
 msgstr "סנכרון זמן"
@@ -3456,9 +3417,9 @@ msgstr "השתמש בטבלת ניתוב"
 
 msgid ""
 "Use the <em>Add</em> Button to add a new lease entry. The <em>MAC-Address</"
-"em> identifies the host, the <em>IPv4-Address</em> specifies the fixed "
-"address to use, and the <em>Hostname</em> is assigned as a symbolic name to "
-"the requesting host. The optional <em>Lease time</em> can be used to set non-"
+"em> indentifies the host, the <em>IPv4-Address</em> specifies to the fixed "
+"address to use and the <em>Hostname</em> is assigned as symbolic name to the "
+"requesting host. The optional <em>Lease time</em> can be used to set non-"
 "standard host-specific lease time, e.g. 12h, 3d or infinite."
 msgstr ""
 
@@ -3570,11 +3531,6 @@ msgid "Warning"
 msgstr "אזהרה"
 
 msgid "Warning: There are unsaved changes that will get lost on reboot!"
-msgstr ""
-
-msgid ""
-"When using a PSK, the PMK can be generated locally without inter AP "
-"communications"
 msgstr ""
 
 msgid "Whether to create an IPv6 default route over the tunnel"
@@ -3748,9 +3704,6 @@ msgstr ""
 msgid "overlay"
 msgstr ""
 
-msgid "random"
-msgstr ""
-
 msgid "relay mode"
 msgstr ""
 
@@ -3796,33 +3749,24 @@ msgstr "כן"
 msgid "« Back"
 msgstr "<< אחורה"
 
-#~ msgid "Action"
-#~ msgstr "פעולה"
+msgid "AR Support"
+msgstr "תמיכת AR"
 
-#~ msgid "Buttons"
-#~ msgstr "כפתורים"
+msgid "Atheros 802.11%s Wireless Controller"
+msgstr "שלט אלחוטי Atheros 802.11%s"
 
-#~ msgid "This page allows the configuration of custom button actions"
-#~ msgstr "דף זה מאפשר להגדיר פעולות מיוחדות עבור הלחצנים."
+msgid "Background Scan"
+msgstr "סריקת רקע"
 
-#~ msgid "AR Support"
-#~ msgstr "תמיכת AR"
+msgid "Compression"
+msgstr "דחיסה"
 
-#~ msgid "Atheros 802.11%s Wireless Controller"
-#~ msgstr "שלט אלחוטי Atheros 802.11%s"
-
-#~ msgid "Background Scan"
-#~ msgstr "סריקת רקע"
-
-#~ msgid "Compression"
-#~ msgstr "דחיסה"
-
-#~ msgid "Static WDS"
-#~ msgstr "WDS סטטי"
+msgid "Static WDS"
+msgstr "WDS סטטי"
 
 #, fuzzy
-#~ msgid "An additional network will be created if you leave this unchecked."
-#~ msgstr "רשת נוספת תווצר אם תשאיר את זה לא מסומן"
+msgid "An additional network will be created if you leave this unchecked."
+msgstr "רשת נוספת תווצר אם תשאיר את זה לא מסומן"
 
-#~ msgid "CPU"
-#~ msgstr "מעבד"
+msgid "CPU"
+msgstr "מעבד"

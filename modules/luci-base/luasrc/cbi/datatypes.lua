@@ -13,34 +13,49 @@ module "luci.cbi.datatypes"
 
 
 _M['or'] = function(v, ...)
-	local i
-	for i = 1, select('#', ...), 2 do
+	local i, n = 1, select('#', ...)
+	while i <= n do
 		local f = select(i, ...)
-		local a = select(i+1, ...)
 		if type(f) ~= "function" then
-			if f == v then
+			i = i + 1
+			local c = v
+			if type(f) == "number" then
+				c = tonumber(c)
+			end
+			if f == c then
 				return true
 			end
-			i = i - 1
-		elseif f(v, unpack(a)) then
-			return true
+		else
+			i = i + 2
+			local a = select(i-1, ...)
+			if f(v, unpack(a)) then
+				return true
+			end
 		end
 	end
 	return false
 end
 
 _M['and'] = function(v, ...)
-	local i
-	for i = 1, select('#', ...), 2 do
+	local i, n = 1, select('#', ...)
+	while i <= n do
 		local f = select(i, ...)
-		local a = select(i+1, ...)
 		if type(f) ~= "function" then
-			if f ~= v then
+			i = i + 1
+			local c = v
+			if type(f) == "number" then
+				c = tonumber(c)
+			end
+			if f ~= c then
 				return false
 			end
 			i = i - 1
-		elseif not f(v, unpack(a)) then
-			return false
+		else
+			i = i + 2
+			local a = select(i-1, ...)
+			if not f(v, unpack(a)) then
+				return false
+			end
 		end
 	end
 	return true
@@ -196,7 +211,23 @@ function portrange(val)
 end
 
 function macaddr(val)
-	return ip.checkmac(val) and true or false
+		if val and val:match(
+		"^[a-fA-F0-9]+:[a-fA-F0-9]+:[a-fA-F0-9]+:" ..
+		 "[a-fA-F0-9]+:[a-fA-F0-9]+:[a-fA-F0-9]+$"
+	) then
+		local parts = util.split( val, ":" )
+
+		for i = 1,6 do
+			parts[i] = tonumber( parts[i], 16 )
+			if parts[i] < 0 or parts[i] > 255 then
+				return false
+			end
+		end
+
+		return true
+	end
+
+	return false
 end
 
 function hostname(val, strict)

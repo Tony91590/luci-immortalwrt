@@ -3,7 +3,7 @@
 -- Licensed to the public under the Apache License 2.0.
 
 local uci = require "luci.model.uci".cursor()
-local sys = require "luci.sys"
+local ipc = require "luci.ip"
 local wa  = require "luci.tools.webadmin"
 local fs  = require "nixio.fs"
 
@@ -30,15 +30,15 @@ limit:depends("ignore", "0")
 
 function limit.cfgvalue(self, section)
 	local value = Value.cfgvalue(self, section)
-	
+
 	if value then
 		return tonumber(value) + 1
-	end 
+	end
 end
 
 function limit.write(self, section, value)
 	value = tonumber(value) - 1
-	return Value.write(self, section, value) 
+	return Value.write(self, section, value)
 end
 
 limit.rmempty = true
@@ -53,7 +53,8 @@ uci:foreach("dhcp", "dnsmasq",
  function(section)
  	leasefn = section.leasefile
  end
-) 
+)
+
 local leasefp = leasefn and fs.access(leasefn) and io.lines(leasefn)
 if leasefp then
 	leases = {}
@@ -87,10 +88,10 @@ name = s2:option(Value, "name", translate("Hostname"))
 mac = s2:option(Value, "mac", translate("<abbr title=\"Media Access Control\">MAC</abbr>-Address"))
 ip = s2:option(Value, "ip", translate("<abbr title=\"Internet Protocol Version 4\">IPv4</abbr>-Address"))
 
-sys.host_hints(function(m, v4, v6, name)
-	if m and v4 then
-		ip:value(v4)
-		mac:value(m, "%s (%s)" %{ m, name or v4 })
+ipc.neighbors({ family = 4 }, function(n)
+	if n.mac and n.dest then
+		ip:value(n.dest:string())
+		mac:value(n.mac, "%s (%s)" %{ n.mac, n.dest:string() })
 	end
 end)
 

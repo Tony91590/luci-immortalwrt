@@ -3,15 +3,16 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-05-19 19:36+0200\n"
-"PO-Revision-Date: 2012-04-09 08:12+0200\n"
-"Last-Translator: Kentaro <kentaro.matsuyama@gmail.com>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"PO-Revision-Date: 2020-10-16 10:26+0000\n"
+"Last-Translator: RyotaGamer <21ryotagamer@gmail.com>\n"
+"Language-Team: Japanese <https://hosted.weblate.org/projects/openwrt/"
+"luciapplicationsopenvpn/ja/>\n"
 "Language: ja\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Pootle 2.0.4\n"
+"X-Generator: Weblate 4.3.1-dev\n"
 
 msgid "%s"
 msgstr "%s"
@@ -26,7 +27,7 @@ msgid "Add"
 msgstr "追加"
 
 msgid "Add route after establishing connection"
-msgstr ""
+msgstr "接続確立後にルートを追加"
 
 msgid "Additional authentication over TLS"
 msgstr ""
@@ -71,7 +72,7 @@ msgid "Certificate authority"
 msgstr ""
 
 msgid "Change process priority"
-msgstr ""
+msgstr "プロセスの優先度を変更"
 
 msgid "Change to directory before initialization"
 msgstr ""
@@ -83,7 +84,7 @@ msgid "Chroot to directory after initialization"
 msgstr ""
 
 msgid "Client is disabled"
-msgstr ""
+msgstr "クライアントが無効です"
 
 msgid "Configuration category"
 msgstr "設定カテゴリ"
@@ -124,13 +125,7 @@ msgstr ""
 msgid "Disable Paging"
 msgstr "ページングを無効にする"
 
-msgid "Disable cipher initialisation vector"
-msgstr ""
-
 msgid "Disable options consistency check"
-msgstr ""
-
-msgid "Disable replay protection"
 msgstr ""
 
 msgid "Do not bind to local address and port"
@@ -140,7 +135,7 @@ msgid "Don't actually execute ifconfig"
 msgstr ""
 
 msgid "Don't add routes automatically"
-msgstr ""
+msgstr "ルートを自動で追加しない"
 
 msgid "Don't cache --askpass or --auth-user-pass passwords"
 msgstr ""
@@ -156,12 +151,6 @@ msgstr ""
 
 msgid "Don't re-read key on restart"
 msgstr "再起動時にキーの再読み込みを行わない"
-
-msgid "Don't require client certificate"
-msgstr ""
-
-msgid "Don't use adaptive lzo compression"
-msgstr ""
 
 msgid "Don't warn on ifconfig inconsistencies"
 msgstr ""
@@ -270,9 +259,6 @@ msgstr ""
 
 msgid "Major mode"
 msgstr ""
-
-msgid "Make tun device IPv6 capable"
-msgstr "tun デバイスでIPv6機能を有効にする"
 
 msgid "Maximum number of queued TCP output packets"
 msgstr ""
@@ -485,10 +471,10 @@ msgid "TCP/UDP port # for both local and remote"
 msgstr "TCP/UDP ポート (ローカル・リモート共用)"
 
 msgid "TCP/UDP port # for local (default=1194)"
-msgstr "TCP/UDP ポート (ローカル, 標準設定=1194)"
+msgstr "TCP/UDP ポート (ローカル, 初期設定=1194)"
 
 msgid "TCP/UDP port # for remote (default=1194)"
-msgstr "TCP/UDP ポート (リモート, 標準設定=1194)"
+msgstr "TCP/UDP ポート (リモート, 初期設定=1194)"
 
 msgid "TLS cipher"
 msgstr "TLS 暗号化方式"
@@ -512,12 +498,6 @@ msgid "Timeframe for key exchange"
 msgstr ""
 
 msgid "Type of used device"
-msgstr ""
-
-msgid "Use fast LZO compression"
-msgstr "高速LZO圧縮機能を使用する"
-
-msgid "Use individual addresses rather than /30 subnets"
 msgstr ""
 
 msgid "Use protocol"
@@ -553,14 +533,17 @@ msgstr "はい (%i)"
 msgid "« Switch to basic configuration"
 msgstr "« 基本設定へ移動"
 
-#~ msgid "Cryptography"
-#~ msgstr "暗号設定"
+msgid "Make tun device IPv6 capable"
+msgstr "tun デバイスでIPv6機能を有効にする"
 
-#~ msgid "Networking"
-#~ msgstr "ネットワーク"
+msgid "Cryptography"
+msgstr "暗号設定"
 
-#~ msgid "Service"
-#~ msgstr "サービス"
+msgid "Networking"
+msgstr "ネットワーク"
 
-#~ msgid "VPN"
-#~ msgstr "VPN"
+msgid "Service"
+msgstr "サービス"
+
+msgid "VPN"
+msgstr "VPN"
